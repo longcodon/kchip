@@ -47,8 +47,9 @@
       </li>
     </ul>
 
+
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -166,7 +167,28 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-    </ul>
+    </ul> --}}
+
+     <div class="user-icons">
+    @auth
+        <div class="user-dropdown">
+            <button class="user-btn">
+                <i class="fas fa-user-circle"></i>
+                {{ Auth::user()->name }}
+            </button>
+            <div class="dropdown-content">
+                <a href="{{ route('profile.edit') }}">Hồ sơ</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="logout-link">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+    @else
+        <a href="{{ route('login') }}" class="login-btn">Đăng nhập</a>
+    @endauth
+</div>
+    
   </nav>
   <!-- /.navbar -->
 
@@ -249,6 +271,29 @@
                 <a href="{{ route('danhmuc.index') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>danh sách sản phẩm </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+
+          <li class="nav-item ">
+            <a href="{{ route('danhmuc.index') }}" class="nav-link ">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>
+                  Đơn hàng
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+     
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('danhmuc.index') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>danh sách đơn hàng  </p>
                 </a>
               </li>
             </ul>

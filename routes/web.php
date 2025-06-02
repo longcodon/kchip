@@ -7,7 +7,9 @@ use App\Http\Controllers\FullController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\DanhmucController; 
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\IndexController; 
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\KhachhangController;
 
 
 /*
@@ -23,11 +25,12 @@ use App\Http\Controllers\WelcomeController;
 
 Route::get('/',[App\Http\Controllers\WelcomeController::class,'index'])->name('welcome');
 
-
+Route::get('/layout', [App\Http\Controllers\IndexController::class,'index']
+)->name('index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'check.admin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,11 +43,19 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/event/{slug}',[App\Http\Controllers\EventController::class,'index'])->name('event');
-Route::get('/full/{slug}',[App\Http\Controllers\FullController::class,'index'])->name('full');
+Route::get('/full/',[App\Http\Controllers\FullController::class,'index'])->name('full');
 Route::get('/pay/',[App\Http\Controllers\PayController::class,'index'])->name('pay');
+
+Route::post('/momo_payment',[PayController::class,'momo_payment']);
+
 
 
 Route::resource('danhmuc', DanhmucController::class);
+Route::resource('khachhang', KhachhangController::class);
+
+
+Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+
 
 
 

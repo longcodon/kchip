@@ -417,3 +417,104 @@ nav a.active {
         margin-bottom: 10px;
     }
 }
+
+
+
+/* Phương thức thanh toán */
+.payment-methods {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.method-options {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.method-option {
+    flex: 1;
+    min-width: 120px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.method-option:hover {
+    border-color: #00c37e;
+}
+
+.method-option input {
+    display: none;
+}
+
+.method-option input:checked + img + span {
+    color: #00c37e;
+    font-weight: bold;
+}
+
+.method-option input:checked {
+    border-color: #00c37e;
+    background: #f0fff8;
+}
+
+.method-option img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.payment-details {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f0fff8;
+    border-radius: 8px;
+    display: none;
+}
+
+/* Nút thanh toán */
+.place-order-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #00c37e, #00d8a7);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.place-order-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.place-order-btn i {
+    font-size: 20px;
+}
+#finalPayBtn {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}

@@ -170,3 +170,162 @@ async function processCheckout() {
     btn.classList.remove('loading');
     btn.disabled = false;
 }
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý hiển thị phương thức thanh toán
+    const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+    const paymentDetails = document.getElementById('paymentDetails');
+    
+    paymentMethods.forEach(method => {
+        method.addEventListener('change', function() {
+            updatePaymentDetails(this.value);
+        });
+    });
+    
+    function updatePaymentDetails(method) {
+        let details = '';
+        
+        switch(method) {
+            case 'momo':
+                details = `
+                    <p><strong>Thanh toán qua Momo:</strong></p>
+                    <p>Số điện thoại: <strong>0901234567</strong></p>
+                    <p>Nội dung: <strong>KChip MãĐơnHàng</strong></p>
+                    <p class="text-warning">Vui lòng chụp màn hình sau khi chuyển tiền</p>
+                `;
+                break;
+                
+            case 'bank':
+                details = `
+                    <p><strong>Chuyển khoản ngân hàng:</strong></p>
+                    <p>Ngân hàng: <strong>Vietcombank</strong></p>
+                    <p>Số tài khoản: <strong>123456789</strong></p>
+                    <p>Tên tài khoản: <strong>NGUYEN VAN A</strong></p>
+                    <p>Nội dung: <strong>KChip MãĐơnHàng</strong></p>
+                `;
+                break;
+                
+            case 'cod':
+                details = `
+                    <p><strong>Thanh toán khi nhận hàng (COD):</strong></p>
+                    <p>Nhân viên sẽ liên hệ xác nhận đơn hàng</p>
+                    <p class="text-warning">Áp dụng phí thu hộ 2% giá trị đơn hàng</p>
+                `;
+                break;
+        }
+        
+        paymentDetails.innerHTML = details;
+        paymentDetails.style.display = 'block';
+    }
+    
+    // Kích hoạt phương thức mặc định
+    updatePaymentDetails('momo');
+    
+    // Xử lý khi nhấn nút thanh toán
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    checkoutBtn.addEventListener('click', function() {
+        processPayment();
+    });
+    
+    function processPayment() {
+        // Validate form
+        const name = document.getElementById('customerName').value;
+        const email = document.getElementById('customerEmail').value;
+        
+        if (!name || !email) {
+            alert('Vui lòng điền đầy đủ thông tin khách hàng');
+            return;
+        }
+        
+        // Lấy phương thức thanh toán
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        
+        // Tạo đơn hàng
+        const orderData = {
+            customerName: name,
+            customerEmail: email,
+            customerFB: document.getElementById('customerFB').value,
+            customerNote: document.getElementById('customerNote').value,
+            paymentMethod: paymentMethod,
+            items: getCartItems(), // Hàm này lấy thông tin giỏ hàng
+            total: calculateTotal() // Hàm tính tổng tiền
+        };
+        
+        // Gửi đơn hàng đến server (AJAX)
+        fetch('/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Chuyển hướng tùy phương thức thanh toán
+                handlePaymentSuccess(data.orderId, paymentMethod);
+            } else {
+                alert('Có lỗi xảy ra: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi xử lý đơn hàng');
+        });
+    }
+    
+    function handlePaymentSuccess(orderId, method) {
+        switch(method) {
+            case 'momo':
+                // Mở deep link Momo
+                window.location.href = `momo://app?action=pay&phone=0901234567&amount=${totalAmount}&description=KChip_${orderId}`;
+                break;
+                
+            case 'bank':
+                // Hiển thị thông tin chuyển khoản chi tiết
+                showBankTransferDetails(orderId);
+                break;
+                
+            case 'cod':
+                // Hiển thị thông báo thành công
+                showOrderSuccess(orderId);
+                break;
+        }
+    }
+    
+    function showBankTransferDetails(orderId) {
+        // Hiển thị modal với thông tin chuyển khoản
+        alert(`Đơn hàng #${orderId} đã được tạo. Vui lòng chuyển khoản theo thông tin bên trên và gửi biên lai cho chúng tôi.`);
+    }
+    
+    function showOrderSuccess(orderId) {
+        // Hiển thị thông báo thành công
+        alert(`Đơn hàng #${orderId} đã được tạo thành công. Nhân viên sẽ liên hệ với bạn trong thời gian sớm nhất.`);
+    }
+    
+    // Khởi tạo giỏ hàng (nếu chưa có)
+    function getCartItems() {
+        // Lấy từ localStorage hoặc biến global
+        return JSON.parse(localStorage.getItem('cartItems')) || [];
+    }
+    
+    function calculateTotal() {
+        // Tính toán tổng tiền từ giỏ hàng
+        const items = getCartItems();
+        let subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // Áp dụng phí COD nếu có
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        if (paymentMethod === 'cod') {
+            return subtotal * 1.02; // +2% phí COD
+        }
+        
+        return subtotal;
+    }
+});

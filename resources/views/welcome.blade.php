@@ -28,7 +28,7 @@
         <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
          <div class="button-container">
   <button     onclick="window.location.href='{{ route('login') }}'" class="login-btn">Đăng nhập</button>
-  <button onclick="window.location.href='{{ route('register') }}'" class="register-btn">Đăng ký</button>
+  <button  onclick="window.location.href='{{ route('register') }}'" class="register-btn">Đăng ký</button>
 </div>
     </div>      
   </header>
@@ -141,9 +141,8 @@
     </div>
 
 
-
     <div class="see-more-wrapper">
-      <button class="see-more-btn coming-soon">Tất Cả</button>
+      <button onclick="window.location.href='{{ route('full') }}'" class="see-more-btn coming-soon"> Tất Cả</button>
     </div>
   </section>
 

@@ -1,7 +1,7 @@
 
 @extends('home')
 @section('content')
-<x-app-layout>
+
   <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -270,7 +270,7 @@
       <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-    </x-app-layout> --}}
+
 @endsection
 
 

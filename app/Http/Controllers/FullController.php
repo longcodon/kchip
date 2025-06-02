@@ -7,9 +7,10 @@ use App\Models\Danhmuc;
 
 class FullController extends Controller
 {
-    public function index($slug)
+    public function index()
     {
-        $danhmuc = Danhmuc::all();
-        return view('layout.full',compact('danhmuc'));
+          $danhmuc = Danhmuc::all(); // Lấy tất cả danh mục
+        return view('layout.full', compact('danhmuc')); // Truyền biến sang view
+       
     }
 }
