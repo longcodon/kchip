@@ -147,23 +147,30 @@
     </div>
   </footer>
 
+
+
+
+
+
   <div class="modal" id="product-modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <div class="modal-body">
-        
+
         <!-- Ảnh sản phẩm -->
         <img id="modal-image" alt="Ảnh sản phẩm" class="modal-image" />
-        
+   
        <!-- Thông tin sản phẩm -->
         <div class="modal-info">
-          <h2 id="modal-title">Tên sản phẩm</h2>
-          <p id="modal-description">Mô tả sản phẩm chi tiết.</p>
-          <p><strong>Tác giả:</strong> <span id="modal-author"></span></p>
-          <p><strong>Người soạn:</strong> <span id="modal-transcriber"></span></p>
-          <p><strong>Giá:</strong> <span id="modal-price"></span></p>
+          <h2 id="modal-title" name='title'>Tên sản phẩm</h2>
+          <p id="modal-description" name='description'>Mô tả sản phẩm chi tiết.</p>
+          <p><strong>Tác giả:</strong> <span id="modal-author" name='author'></span></p>
+          <p><strong>Người soạn:</strong> <span id="modal-transcriber" name='transcribed'></span></p>
+          <p><strong>Giá:</strong> <span id="modal-price" name='price'></span></p>
           <button class="add-cart-btn" >Thêm vào giỏ hàng</button>
         </div>
+
+
         
         <!-- Video nhúng -->
         <div class="video-container">
@@ -175,6 +182,7 @@
   </div>
   
   <!-- Giỏ hàng popup -->
+
   <div class="cart-overlay" id="cartOverlay">
     <div class="cart-panel">
       <div class="cart-header">
@@ -195,7 +203,7 @@
       </div>
     </div>
   </div>
-  
+
   
    
   <script src="{{asset('frontend/js/index.js')}}"></script>

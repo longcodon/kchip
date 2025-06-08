@@ -10,7 +10,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\IndexController; 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KhachhangController;
-
+use App\Http\Controllers\GiohangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +53,7 @@ Route::post('/momo_payment',[PayController::class,'momo_payment']);
 Route::resource('danhmuc', DanhmucController::class);
 Route::resource('khachhang', KhachhangController::class);
 
+Route::resource('giohang', GiohangController::class);
 
 Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 
