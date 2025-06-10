@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>That Sky Shop Clone</title>
@@ -199,7 +201,7 @@
           <span>Tổng cộng:</span>
           <strong id="cartTotal">0 ₫</strong>
         </div>
-        <button class="checkout-btn"  onclick="window.location.href='{{ route('pay') }}'" >Thanh toán</button>
+        <button class="checkout-btn" >Thanh toán</button>
       </div>
     </div>
   </div>
@@ -209,6 +211,13 @@
   <script src="{{asset('frontend/js/index.js')}}"></script>
   <script src="{{asset('frontend/js/product2.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+  const SAVE_CART_URL = "{{ url('/save-cart') }}";
+</script>
+
+<script>
+    const PAY_URL = "{{ route('pay') }}";
+</script>
 
 </body>
 </html>

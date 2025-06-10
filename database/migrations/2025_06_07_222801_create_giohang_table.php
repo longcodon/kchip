@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('giohang', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('giohang', function (Blueprint $table) {
+    $table->string('name');
+    $table->integer('price');
+    $table->string('img')->nullable();
+});
+
+
     }
 
     /**

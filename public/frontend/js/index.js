@@ -107,7 +107,7 @@ function toggleCart() {
   overlay.style.display = overlay.style.display === "flex" ? "none" : "flex";
 }
 
-function addToCart(name, price, imgSrc) {
+function addToCart(name, price, imgSrc,author = "Không rõ") {
     const found = cart.find(item => item.name === name);
     if (found) {
         Swal.fire({
@@ -122,8 +122,8 @@ function addToCart(name, price, imgSrc) {
           
       return;
     }
-  
-    cart.push({ name, price, imgSrc });
+    cart.push({ name, price, imgSrc, author }); // ✅ Thêm author vào
+    
     renderCart();
   
     // Ẩn modal trước khi hiển thị thông báo
@@ -182,10 +182,14 @@ document.querySelector('.add-cart-btn').addEventListener('click', () => {
     const name = document.getElementById('modal-title').textContent;
     const price = document.getElementById('modal-price').textContent;
     const imgSrc = document.getElementById('modal-image').src;
-  
-    addToCart(name, price, imgSrc);
-    //toggleCart(); // Mở giỏ hàng ngay sau khi thêm
-  });
+    const author = document.getElementById('modal-author').textContent; // ✅ lấy author từ modal
+
+    addToCart(name, price, imgSrc, author); // ✅ truyền author vào
+});
+
+
+
+
 document.getElementById("cart-icon").addEventListener("click", toggleCart);
 
 // MA GIAM GIA
@@ -234,3 +238,54 @@ const validCoupon = {
     renderCart();
   }
   
+
+
+
+
+document.querySelector('.checkout-btn').addEventListener('click', () => {
+  if (cart.length === 0) {
+    Swal.fire("Giỏ hàng đang trống!");
+    return;
+  }
+console.log("Đang gửi cart:", cart);
+console.log("URL:", SAVE_CART_URL);
+
+fetch(SAVE_CART_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+  },
+  body: JSON.stringify({ items: cart })
+})
+.then(async (res) => {
+  const text = await res.text();
+  const data = JSON.parse(text);
+
+  if (data.success) {
+    // 🟢 Thay vì chờ người dùng ấn OK mới chuyển trang
+    // bạn dùng setTimeout hoặc auto chuyển luôn:
+    Swal.fire({
+      icon: 'success',
+      title: 'Thành công!',
+      text: data.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    // Tự động chuyển trang sau khi hiển thị thông báo 1.5 giây
+    setTimeout(() => {
+      window.location.href = PAY_URL;
+    }, 1500);
+  } else {
+    Swal.fire('Thất bại!', data.message, 'error');
+  }
+})
+
+.catch(err => {
+  console.error("❌ FETCH ERROR:", err);
+  Swal.fire('Lỗi kết nối!', 'Không thể gửi dữ liệu.', 'error');
+});
+
+});
+

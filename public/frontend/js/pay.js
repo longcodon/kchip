@@ -1,8 +1,5 @@
 // Dữ liệu mẫu
-const cartItems = [
-    { id: 1, name: "Love Boat Pin", price: 29.00, quantity: 1, image: "images/product1.jpg" },
-    { id: 2, name: "Al Love Sky Purse", price: 35.00, quantity: 1, image: "images/product2.jpg" }
-];
+
 
 const SERVICE_FEE = 5.00;
 const VALID_COUPONS = [
@@ -15,7 +12,7 @@ let appliedCoupon = null;
 
 // Khởi tạo trang
 document.addEventListener('DOMContentLoaded', function() {
-    renderOrderItems();
+    // renderOrderItems();
     calculateTotal();
     
     // Sự kiện nút áp dụng mã

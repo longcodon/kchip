@@ -12,7 +12,8 @@ class KhachhangController extends Controller
      */
     public function index()
     {
-        //
+       $khachhang=Khachhang::all();
+        return view('admin.khachhang.index',compact('khachhang'));
     }
 
     /**

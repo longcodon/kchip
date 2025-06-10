@@ -49,7 +49,7 @@
 
 
     <!-- Right navbar links -->
-    {{-- <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -167,8 +167,9 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-    </ul> --}}
+    </ul>
 
+  
      <div class="user-icons">
     @auth
         <div class="user-dropdown">
@@ -188,8 +189,9 @@
         <a href="{{ route('login') }}" class="login-btn">Đăng nhập</a>
     @endauth
 </div>
-    
+ 
   </nav>
+   
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -281,19 +283,19 @@
 
 
           <li class="nav-item ">
-            <a href="{{ route('danhmuc.index') }}" class="nav-link ">
+            <a href="{{ route('khachhang.index') }}" class="nav-link ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
-                  Đơn hàng
+                  Khách Hàng
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
      
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('danhmuc.index') }}" class="nav-link ">
+                <a href="{{ route('khachhang.index') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>danh sách đơn hàng  </p>
+                  <p>danh sách khách hàng  </p>
                 </a>
               </li>
             </ul>

@@ -10,6 +10,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\IndexController; 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KhachhangController;
+
 use App\Http\Controllers\GiohangController;
 
 /*
@@ -45,6 +46,11 @@ require __DIR__.'/auth.php';
 Route::get('/event/{slug}',[App\Http\Controllers\EventController::class,'index'])->name('event');
 Route::get('/full/',[App\Http\Controllers\FullController::class,'index'])->name('full');
 Route::get('/pay/',[App\Http\Controllers\PayController::class,'index'])->name('pay');
+Route::get('/khachhang/',[App\Http\Controllers\KhachhangController::class,'index'])->name('khachhang');
+
+
+
+
 
 Route::post('/momo_payment',[PayController::class,'momo_payment']);
 
@@ -53,7 +59,13 @@ Route::post('/momo_payment',[PayController::class,'momo_payment']);
 Route::resource('danhmuc', DanhmucController::class);
 Route::resource('khachhang', KhachhangController::class);
 
-Route::resource('giohang', GiohangController::class);
+
+Route::post('/momo_callback', [PayController::class, 'momoCallback']);
+Route::post('/vnpay_payment', [PayController::class, 'vnpay_payment']);
+Route::get('/vnpay_return', [PayController::class, 'vnpayReturn']);
+// Route::resource('giohang', GiohangController::class);
+Route::post('/save-cart', [GiohangController::class, 'saveCart'])->name('save.cart'); 
+
 
 Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 

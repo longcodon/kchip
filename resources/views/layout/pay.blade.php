@@ -73,16 +73,25 @@
                 <!-- Đơn hàng -->
                 <section class="order-summary">
                     <h2><i class="fas fa-receipt"></i> Đơn hàng</h2>
-                    
-                    <div class="order-items" id="orderItems">
-@foreach ($danhmuc as $item)
- <div class="order-item">
-            <div class="item-name">{{ $item->title  }}</div>
-            <div class="item-price">{{ number_format($item->price, 0, ',', '.') }}đ</div>
+                     
+<div class="order-items" id="orderItems">
+    @forelse ($Giohang as $item)
+        <div class="order-item">
+            <div class="item-info">
+                <img src="{{ $item->img }}" alt="{{ $item->name }}" style="width: 50px;">
+                <div>
+                    <h3>{{ $item->name }}</h3>
+                    <p>{{ number_format($item->price, 0, ',', '.') }}đ × 1</p>
+                </div>
+            </div>
+            <span class="item-price">{{ number_format($item->price, 0, ',', '.') }}đ</span>
         </div>
- @endforeach
+    @empty
+        <p style="color: red;">Không có sản phẩm trong giỏ hàng.</p>
+    @endforelse
+</div>
 
-                    </div>
+
                     
                     <!-- Phần mã giảm giá mới thêm -->
                     <div class="discount-section">
@@ -117,6 +126,12 @@
                 <img src="frontend/images/cod.png" alt="COD">
                 <span>Thanh toán khi nhận hàng</span>
             </label>
+
+           <label class="method-option">
+        <input type="radio" name="paymentMethod" value="vnpay">
+        <img src="frontend/images/vnpay.png" alt="VNPAY">
+        <span>VNPAY</span>
+    </label>     
         </div>
         
         <!-- Hiển thị thông tin tùy chọn -->
@@ -128,27 +143,36 @@
 
                     
                     <div class="order-total">
-                        <div class="total-row">
+                        {{-- <div class="total-row">
                             <span>Tạm tính:</span>
                             <span id="subtotal">$0.00</span>
                         </div>
                         <div class="total-row">
                             <span>Phí dịch vụ:</span>
                             <span id="fee">$0.00</span>
-                        </div>
+                        </div> --}}
                         <div class="total-row grand-total">
-                            <span>Tổng cộng:</span>
-                            <span id="grandTotal">$0.00</span>
+<span>Tổng cộng:</span>
+<span id="grandTotal">@foreach ($Giohang as $item)
+    <p>{{ $item->price }}</p>
+@endforeach</span>
                         </div>
                     </div>
                    
 <form id="paymentFormFinal" method="POST">
     @csrf
-    <input type="hidden" name="price" value="{{ $price }}">
+<input type="hidden" name="price" value="10000"> {{-- gán tạm giá trị hợp lệ --}}
+
     <input type="hidden" name="name" id="finalName">
     <input type="hidden" name="email" id="finalEmail">
     <input type="hidden" name="fb" id="finalFB">
     <input type="hidden" name="note" id="finalNote">
+
+<input type="hidden" name="total_vnpay" id="totalVnpayInput" value="{{ $price }}">
+  <input type="hidden" name="price" value="{{ $price }}">
+    <input type="hidden" name="title" value="{{ $Giohang[0]->name ?? '' }}">
+    <input type="hidden" name="author" value="{{ $Giohang[0]->author ?? '' }}">
+     <input type="hidden" name="img" value="{{ $Giohang[0]->img ?? '' }}">
 
     <button type="submit" id="finalPayBtn">Thanh toán</button>
 </form>
@@ -215,10 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
             case "cod":
                 actionURL = "{{ url('/cod_payment') }}";
                 break;
+                case "vnpay":
+                actionURL = "{{ url('/vnpay_payment') }}";
+                break;
             default:
                 alert("Vui lòng chọn phương thức thanh toán.");
                 return;
         }
+
+
 
         // Gán action cho form và submit
         form.action = actionURL;

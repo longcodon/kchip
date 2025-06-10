@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Giohang extends Model
 {
-    use HasFactory;
-      protected $table = 'giohang'; 
+    protected $table = 'giohang';
+
 }
