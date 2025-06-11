@@ -73,7 +73,8 @@ class KhachhangController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $khachhang = Khachhang::find($id);
+        return view('admin.khachhang.edit',compact('khachhang'));
     }
 
     /**
@@ -81,7 +82,33 @@ class KhachhangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+          $data=$request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'fb' => 'required',
+            'note' => 'required',
+            
+
+
+        ],[
+            
+           
+            
+
+        ]);
+
+
+             $khachhang = Khachhang::find($id);
+        $khachhang->name=$data['name'];
+        $khachhang->email=$data['email'];
+        $khachhang->fb=$data['fb'];
+        $khachhang->note=$data['note'];
+
+     
+
+        $khachhang->save();
+        // toastr()->success('Data has been saved successfully!', 'Congrats');
+        return redirect()->route('khachhang.index');
     }
 
     /**
@@ -89,6 +116,8 @@ class KhachhangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+               $khachhang = Khachhang::find($id);
+        $khachhang->delete();
+          return redirect()->route('khachhang.index');
     }
 }

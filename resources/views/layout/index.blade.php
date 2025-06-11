@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>That Sky Shop Clone</title>
@@ -13,8 +14,8 @@
     <nav id="main-nav">
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
-        <a href="#"class="coming-soon">Dịch Vụ</a>
-        <a href="#"class="coming-soon">Diễn Đàn</a>
+        <a href="{{ route('dichvu') }}">Dịch Vụ</a>
+        
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
@@ -81,15 +82,7 @@
       <i class="fas fa-chevron-down toggle-icon"></i>
     </div>
     <div class="notice-content" id="noticeContent">
-      <p>
-        Dear Sky Friends in the United States: Due to recent changes in U.S. tariff policies, we’ve updated our ordering process and product availability for customers with U.S. shipping addresses.
-        <strong>Starting May 7, 2025, please <a href="#">click here</a> to place orders through our new U.S.-specific site.</strong>
-      </p>
-      <p>
-        At this time, a selection of products is available for U.S. delivery. Items with extended shipping timelines will be temporarily unavailable as we work to minimize the effects of evolving trade conditions.
-      </p>
-      <p>Thank you for your understanding and continued support!<br>— The thatskyshop Team</p>
-      <a href="#" class="learn-more">Learn more</a>
+     <p>{{ $thongbao->trangchu ?? 'Chưa có nội dung' }}</p>
     </div>
   </section>
 
@@ -251,6 +244,11 @@
    
   <script src="{{ asset('frontend/js/index.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const SAVE_CART_URL = "{{ url('/save-cart') }}";
+</script>
+
+
   
 </body>
 </html>

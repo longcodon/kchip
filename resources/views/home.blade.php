@@ -49,7 +49,7 @@
 
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -167,10 +167,10 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-    </ul>
+    </ul> --}}
 
   
-     <div class="user-icons">
+ <div class="user-icons">
     @auth
         <div class="user-dropdown">
             <button class="user-btn">
@@ -232,21 +232,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="#" class="nav-link ">
+            <a href="{{ route('dashboard') }}" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
+                Thống kê
+               
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
+       
           </li>
 
 
@@ -272,7 +265,7 @@
               <li class="nav-item">
                 <a href="{{ route('danhmuc.index') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>danh sách sản phẩm </p>
+                  <p>Danh sách sản phẩm </p>
                 </a>
               </li>
             </ul>
@@ -300,6 +293,79 @@
               </li>
             </ul>
           </li>
+
+
+
+
+
+
+        {{-- //thong bao --}}
+           <li class="nav-item ">
+            <a href="{{ route('thongbao.index') }}" class="nav-link ">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>
+                  Thông báo 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+
+            {{-- <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('thongbao.create') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>thêm thông báo </p>
+                </a>
+              </li>
+            </ul> --}}
+     
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('thongbao.index') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>danh sách thông báo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+
+
+
+
+
+
+          <li class="nav-item ">
+            <a href="{{ route('thongbao.index') }}" class="nav-link ">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>
+                  Mã giảm giá
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+
+            {{-- <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('thongbao.create') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>thêm thông báo </p>
+                </a>
+              </li>
+            </ul> --}}
+     
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('thongbao.index') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>danh sách thông báo</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -317,7 +383,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  @yield('content');
+  @yield('content')
   </div>
   
   <!-- /.content-wrapper -->
@@ -329,13 +395,13 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
-  </footer>
+  </footer> --}}
 </div>
 <!-- ./wrapper -->
 
@@ -354,6 +420,11 @@
 {{-- <script src="{{asset('backend/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('backend/dist/js/pages/dashboard3.js')}}"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script> 
+
 </body>
 </html>
 

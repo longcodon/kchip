@@ -16,16 +16,14 @@
     <nav id="main-nav">
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
-        <a href="#"class="coming-soon">Dịch Vụ</a>
-        <a href="#"class="coming-soon">Diễn Đàn</a>
+        <a href="{{ route('dichvu') }}" class="coming-soon">Dịch Vụ</a>
+
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
     </div>
     <div class="user-icons">
-        <i class="fas fa-search coming-soon"></i>
-        <i class="fas fa-user coming-soon"></i>
-        <i class="fas fa-heart coming-soon"></i>
+ 
         <i class="fas fa-shopping-cart " id="cart-icon"></i>
     </div>      
   </header>
@@ -35,45 +33,45 @@
       <i class="fas fa-chevron-down toggle-icon"></i>
     </div>
     <div class="notice-content" id="noticeContent">
-      <p>
-        giảm giá 10% cho tất cả các sản phẩm Mã: KCHIP10 thử đi rồi biết 
-        <strong>bắt đầu từ: 20/20/20202020</strong>
-      </p>
-      <p>
-        giảm giá 10% cho tất cả các sản phẩm 
-      </p>
-      <p>Thank you for your understanding and continued support!<br>— The thatskyshop Team</p>
-      <a href="#" class="learn-more">Learn more</a>
+ <p>{{ $thongbao->uudai ?? 'Chưa có nội dung' }}</p>
     </div>
   </section>
 
   <main class="all-products">
     <h2 class="section-title">Tất Cả Sản Phẩm</h2>
    <div class="product-filters">
-  <div class="filters">
+<form method="GET" id="filter-form" class="filters" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+  <div>
     <label for="filter-author">Người Soạn:</label>
-    <select id="filter-author">
+    <select id="filter-author" name="transcribed" onchange="this.form.submit()">
       <option value="">Tất cả</option>
-      <option value="kchip">KChip</option>
-      <option value="kteam">KTeam</option>
+      <option value="kchip" {{ request('transcribed') == 'kchip' ? 'selected' : '' }}>KChip</option>
+      <option value="kteam" {{ request('transcribed') == 'kteam' ? 'selected' : '' }}>KTeam</option>
     </select>
+  </div>
 
+  <div>
     <label for="filter-type">Thể loại:</label>
-    <select id="filter-type">
+    <select id="filter-type" name="country" onchange="this.form.submit()">
       <option value="">Tất cả</option>
-      <option value="vietnam">Việt Nam</option>
-      <option value="khac">Khác</option>
+      <option value="VN" {{ request('country') == 'VN' ? 'selected' : '' }}>Việt Nam</option>
+      <option value="khac" {{ request('country') == 'khac' ? 'selected' : '' }}>Khác</option>
     </select>
   </div>
 
   <div class="sort">
     <label for="sort-price">Sắp xếp:</label>
-    <select id="sort-price">
+    <select id="sort-price" name="sort" onchange="this.form.submit()">
       <option value="">--</option>
-      <option value="asc">Giá thấp - cao</option>
-      <option value="desc">Giá cao - thấp</option>
+      <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Giá thấp - cao</option>
+      <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Giá cao - thấp</option>
     </select>
   </div>
+</form>
+
+
+
+  
 </div>
 
 
@@ -201,7 +199,7 @@
           <span>Tổng cộng:</span>
           <strong id="cartTotal">0 ₫</strong>
         </div>
-        <button class="checkout-btn" >Thanh toán</button>
+        <button class="checkout-btn" onclick="window.location.href='{{ route('pay') }}'" >Thanh toán</button>
       </div>
     </div>
   </div>

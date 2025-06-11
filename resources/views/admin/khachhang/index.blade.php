@@ -85,12 +85,12 @@
               <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
               <td class="text-center">
                 <div class="btn-group btn-group-sm">
-                  <a href="{{ route('danhmuc.edit', $item->id) }}" 
+                  <a href="{{ route('khachhang.edit', $item->id) }}" 
                      class="btn btn-info" title="Sửa">
                     <i class="fas fa-edit"></i>
                   </a>
-                  
-                  <form action="{{ route('danhmuc.destroy', $item->id) }}" method="POST">
+
+                  <form action="{{ route('khachhang.destroy', $item->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" title="Xóa"

@@ -10,9 +10,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\IndexController; 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KhachhangController;
-
+use App\Http\Controllers\ThongbaoController;
 use App\Http\Controllers\GiohangController;
-
+use App\Http\Controllers\DichvuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,14 +24,15 @@ use App\Http\Controllers\GiohangController;
 |
 */
 
+
 Route::get('/',[App\Http\Controllers\WelcomeController::class,'index'])->name('welcome');
 
 Route::get('/layout', [App\Http\Controllers\IndexController::class,'index']
 )->name('index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'check.admin'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified', 'check.admin'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +47,7 @@ require __DIR__.'/auth.php';
 Route::get('/event/{slug}',[App\Http\Controllers\EventController::class,'index'])->name('event');
 Route::get('/full/',[App\Http\Controllers\FullController::class,'index'])->name('full');
 Route::get('/pay/',[App\Http\Controllers\PayController::class,'index'])->name('pay');
+Route::get('/dichvu/',[App\Http\Controllers\DichvuController::class,'index'])->name('dichvu');
 Route::get('/khachhang/',[App\Http\Controllers\KhachhangController::class,'index'])->name('khachhang');
 
 
@@ -58,6 +60,8 @@ Route::post('/momo_payment',[PayController::class,'momo_payment']);
 
 Route::resource('danhmuc', DanhmucController::class);
 Route::resource('khachhang', KhachhangController::class);
+Route::resource('thongbao', ThongbaoController::class);
+Route::get('/thongbao/edit/{country}', [ThongbaoController::class, 'editByCountry'])->name('thongbao.edit.country');
 
 
 Route::post('/momo_callback', [PayController::class, 'momoCallback']);
