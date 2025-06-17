@@ -16,15 +16,41 @@
     <nav id="main-nav">
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
-        <a href="{{ route('dichvu') }}" class="coming-soon">Dịch Vụ</a>
+        <a href="{{ route('dichvu') }}">Dịch Vụ</a>
+        <a href="{{ route('donhang') }}">Đơn hàng</a>
 
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
     </div>
     <div class="user-icons">
- 
-        <i class="fas fa-shopping-cart " id="cart-icon"></i>
+{{--  
+         <i class="fas fa-search coming-soon"></i>
+
+        <i class="fas fa-user coming-soon"></i>
+        <i class="fas fa-heart coming-soon"></i>
+        <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
+         <div class="button-container">
+ <div class="user-icons">
+    @auth
+        <div class="user-dropdown">
+            <button class="user-btn">
+                <i class="fas fa-user-circle"></i>
+                {{ Auth::user()->name }}
+            </button>
+            <div class="dropdown-content">
+                <a href="{{ route('profile.edit') }}">Hồ sơ</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="logout-link">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+    @else
+        <a href="{{ route('login') }}" class="login-btn">Đăng nhập</a>
+    @endauth
+</div>
+</div>
     </div>      
   </header>
   <section class="notice-banner">
@@ -191,10 +217,10 @@
       </div>
       <div class="cart-items" id="cartItems"></div>
       <div class="cart-footer">
-        <div class="discount-code">
+        {{-- <div class="discount-code">
             <input type="text" placeholder="Nhập mã giảm giá" />
             <button class="apply-coupon-btn " onclick="applyCoupon()" >Áp dụng</button>
-        </div>
+        </div> --}}
         <div class="cart-total">
           <span>Tổng cộng:</span>
           <strong id="cartTotal">0 ₫</strong>

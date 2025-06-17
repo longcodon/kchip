@@ -23,6 +23,7 @@
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
+         <a href="{{ route('donhang') }}">Đơn hàng</a>
         
     </nav>
     <div class="menu-toggle" id="menu-toggle">
@@ -85,7 +86,7 @@
             <em>* Mức giá được quy định một phần theo độ dài và mức độ hoàn thiện do mình đánh giá. Một số bài không phù hợp với đàn trong game hoặc mình không đủ khả năng thực hiện sẽ không được nhận để đảm bảo chất lượng sheet nhạc.</em>
         </p>
         <p class="sheet-contact">
-            📩 Liên hệ Fanpage: <a href="#">link</a>
+            📩 Liên hệ Fanpage: <a href="https://www.facebook.com/profile.php?id=100083202309058">link</a>
         </p>
     </div>
 </section>

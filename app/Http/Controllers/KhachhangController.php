@@ -10,11 +10,16 @@ class KhachhangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-       $khachhang=Khachhang::all();
-        return view('admin.khachhang.index',compact('khachhang'));
-    }
+public function index()
+{
+    $orders = \App\Models\Khachhang::all()
+        ->groupBy(function ($item) {
+            return $item->created_at->format('Y-m-d H:i:s'); // dùng timestamp để gom nhóm
+        });
+
+    return view('admin.khachhang.index', compact('orders'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -120,4 +125,17 @@ class KhachhangController extends Controller
         $khachhang->delete();
           return redirect()->route('khachhang.index');
     }
+
+
+
+public function updateTrangthai(Request $request, $id)
+{
+    $kh = Khachhang::findOrFail($id);
+    $kh->trangthai = $request->input('trangthai');
+    $kh->save();
+
+    return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+}
+
+
 }

@@ -13,10 +13,12 @@ use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\ThongbaoController;
 use App\Http\Controllers\GiohangController;
 use App\Http\Controllers\DichvuController;
+use App\Http\Controllers\MaController;
+use App\Http\Controllers\DonhangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+|-----------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
@@ -48,25 +50,40 @@ Route::get('/event/{slug}',[App\Http\Controllers\EventController::class,'index']
 Route::get('/full/',[App\Http\Controllers\FullController::class,'index'])->name('full');
 Route::get('/pay/',[App\Http\Controllers\PayController::class,'index'])->name('pay');
 Route::get('/dichvu/',[App\Http\Controllers\DichvuController::class,'index'])->name('dichvu');
+
+Route::get('/donhang/',[App\Http\Controllers\DonhangController::class,'index'])->name('donhang');
 Route::get('/khachhang/',[App\Http\Controllers\KhachhangController::class,'index'])->name('khachhang');
 
 
+Route::get('/get-cart', [App\Http\Controllers\GiohangController::class, 'getCart'])->name('get.cart');
 
 
 
-Route::post('/momo_payment',[PayController::class,'momo_payment']);
+
 
 
 
 Route::resource('danhmuc', DanhmucController::class);
 Route::resource('khachhang', KhachhangController::class);
+Route::put('/khachhang/update-trangthai/{id}', [KhachhangController::class, 'updateTrangthai'])->name('khachhang.updateTrangthai');
+
 Route::resource('thongbao', ThongbaoController::class);
 Route::get('/thongbao/edit/{country}', [ThongbaoController::class, 'editByCountry'])->name('thongbao.edit.country');
 
+Route::resource('ma', MaController::class);
 
-Route::post('/momo_callback', [PayController::class, 'momoCallback']);
-Route::post('/vnpay_payment', [PayController::class, 'vnpay_payment']);
-Route::get('/vnpay_return', [PayController::class, 'vnpayReturn']);
+
+
+
+Route::post('/vnpay_payment', [PayController::class, 'vnpay_payment'])->name('vnpay_payment');
+Route::get('/vnpay_return', [PayController::class, 'vnpayReturn'])->name('vnpay_return');
+
+Route::post('/momo_payment', [PayController::class, 'momo_payment'])->name('momo_payment');
+Route::get('/momo_callback', [PayController::class, 'momoCallback'])->name('momo_callback');
+
+
+Route::post('/cod_payment', [PayController::class, 'cod_payment'])->name('cod_payment');
+
 // Route::resource('giohang', GiohangController::class);
 Route::post('/save-cart', [GiohangController::class, 'saveCart'])->name('save.cart'); 
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class GiohangController extends Controller
 {
-    public function saveCart(Request $request)
+   public function saveCart(Request $request)
 {
     $items = $request->input('items');
 
@@ -16,26 +16,42 @@ class GiohangController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Dữ liệu không hợp lệ'
-        ], 400, ['Content-Type' => 'application/json']);
+        ], 400);
     }
- 
-    // ✅ XÓA TOÀN BỘ DỮ LIỆU CŨ TRONG GIOHANG
-    \DB::table('giohang')->truncate();
 
     foreach ($items as $item) {
-       \DB::table('giohang')->insert([
-    'name' => $item['name'] ?? 'Không rõ',
-    'price' => (int) preg_replace('/[^\d]/', '', $item['price'] ?? '0'),
-    'img' => $item['imgSrc'] ?? '',
-    'author' => $item['author'] ?? 'Không rõ' // ✅ Thêm dòng này
-]);
+        $name = $item['name'] ?? 'Không rõ';
+        $price = (int) preg_replace('/[^\d]/', '', $item['price'] ?? '0');
+        $img = $item['imgSrc'] ?? '';
+        $author = $item['author'] ?? 'Không rõ';
 
+        // Kiểm tra nếu sản phẩm đã có thì bỏ qua hoặc cập nhật
+        $exists = \DB::table('giohang')->where('name', $name)->first();
+
+        if (!$exists) {
+            \DB::table('giohang')->insert([
+                'name' => $name,
+                'price' => $price,
+                'img' => $img,
+                'author' => $author
+            ]);
+        }
     }
 
     return response()->json([
         'success' => true,
         'message' => 'Đã cập nhật giỏ hàng!'
-    ], 200, ['Content-Type' => 'application/json']);
+    ], 200);
 }
+public function getCart()
+{
+    $cartItems = \DB::table('giohang')->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $cartItems
+    ]);
+}
+
 
 }

@@ -339,7 +339,7 @@
 
 
           <li class="nav-item ">
-            <a href="{{ route('thongbao.index') }}" class="nav-link ">
+            <a href="{{ route('ma.index') }}" class="nav-link ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                   Mã giảm giá
@@ -348,20 +348,20 @@
             </a>
 
 
-            {{-- <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('thongbao.create') }}" class="nav-link ">
+                <a href="{{ route('ma.create') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>thêm thông báo </p>
+                  <p>thêm mã giảm giá </p>
                 </a>
               </li>
-            </ul> --}}
+            </ul>
      
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('thongbao.index') }}" class="nav-link ">
+                <a href="{{ route('ma.index') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>danh sách thông báo</p>
+                  <p>danh sách mã giảm giá</p>
                 </a>
               </li>
             </ul>

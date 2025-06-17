@@ -3,10 +3,10 @@
 @section('content')
 <div class="card card-primary">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3 class="card-title">Thêm khách hàng</h3>
-    <a href="{{ route('khachhang.create') }}" class="btn btn-sm btn-success">
+    <h3 class="card-title">Danh sách khách hàng</h3>
+    {{-- <a href="{{ route('khachhang.create') }}" class="btn btn-sm btn-success">
       <i class="fas fa-plus"></i> Thêm mới
-    </a>
+    </a> --}}
   </div>
   
   @if ($errors->any())
@@ -46,6 +46,7 @@
             <th>img</th>
             <th>Giá tiền</th>
             <th>Ghi chú</th>
+            <th>Thanh toán</th>
  
    
             <th >Trạng thái</th>
@@ -55,70 +56,65 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($khachhang as $index => $item)
-            <tr>
-              <td>{{ $index + 1 }}</td>
-              <td>{{ $item->name }}</td>
-              <td>{{ $item->email ?? 'N/A' }}</td>
-              <td>{{ $item->fb ?? 'N/A' }}</td>
-              <td>{{ $item->title  }}</td>
-              <td>{{ $item->author ?? 'N/A' }}</td>
-              <td class="text-center">
-                @if($item->img)
-                  <img class="img-thumbnail" style="max-height: 100px;" 
-                       src="{{ asset( $item->img) }}" 
-                       alt="{{ $item->title }}"
-                       data-toggle="modal" data-target="#imageModal{{ $item->id }}">
-                @else
-                  <span class="text-muted">Không có ảnh</span>
-                @endif
-              </td>
-              <td class="text-right">{{ number_format($item->price, 0, ',', '.') }} ₫</td>
-              
-             <td>{{ $item->note ?? 'N/A' }}</td>
-              
-              <td class="text-center">
-                <span class="badge badge-{{ $item->status ? 'success' : 'secondary' }}">
-                  {{ $item->status ? 'Đã thanh toán ' : 'Chưa thanh toán' }}
-                </span>
-              </td>
-              <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
-              <td class="text-center">
-                <div class="btn-group btn-group-sm">
-                  <a href="{{ route('khachhang.edit', $item->id) }}" 
-                     class="btn btn-info" title="Sửa">
-                    <i class="fas fa-edit"></i>
-                  </a>
+@foreach ($orders as $groupTime => $group)
+  <tr>
+    <td colspan="12" style="background: #f0f0f0; font-weight: bold;">
+      🧾 Đơn hàng lúc {{ \Carbon\Carbon::parse($groupTime)->format('d/m/Y H:i:s') }} — {{ $group->count() }} sản phẩm
+    </td>
+  </tr>
 
-                  <form action="{{ route('khachhang.destroy', $item->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" title="Xóa"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </form>
-                  
-                 
-                </div>
-              </td>
-            </tr>
-            
-            <!-- Modal xem ảnh lớn -->
-            <div class="modal fade" id="imageModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-body text-center">
-                    <img src="{{ asset('uploads/danhmuc/' . $item->image) }}" 
-                         class="img-fluid" alt="{{ $item->title }}">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          @endforeach
+  @foreach ($group as $item)
+    <tr>
+      <td>{{ $loop->iteration }}</td>
+      <td>{{ $item->name }}</td>
+      <td>{{ $item->email }}</td>
+      <td>{{ $item->fb }}</td>
+      <td>{{ $item->title }}</td>
+      <td>{{ $item->author }}</td>
+      <td>
+        @if($item->img)
+          <img class="img-thumbnail" style="max-height: 100px;" src="{{ asset($item->img) }}">
+        @else
+          Không có ảnh
+        @endif
+      </td>
+      <td class="text-right">{{ number_format($item->price, 0, ',', '.') }} ₫</td>
+      <td>{{ $item->note }}</td>
+
+
+        <td>
+        <span class="badge badge-success">Đã thanh toán</span>
+      </td>
+      
+<td>
+  <form method="POST" action="{{ route('khachhang.updateTrangthai', $item->id) }}">
+    @csrf
+    @method('PUT')
+    <select name="trangthai" class="form-control form-control-sm" onchange="this.form.submit()">
+      <option value="chờ xác nhận" {{ $item->trangthai == 'chờ xác nhận' ? 'selected' : '' }}>Chờ xác nhận</option>
+      <option value="đã xác nhận" {{ $item->trangthai == 'đã xác nhận' ? 'selected' : '' }}>Đã xác nhận</option>
+      <option value="đã gửi hàng" {{ $item->trangthai == 'đã gửi hàng' ? 'selected' : '' }}>Đã gửi hàng</option>
+    
+    </select>
+  </form>
+</td>
+
+
+      <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
+      <td>
+        <div class="btn-group btn-group-sm">
+          <a href="{{ route('khachhang.edit', $item->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+          <form method="POST" action="{{ route('khachhang.destroy', $item->id) }}">
+            @csrf @method('DELETE')
+            <button onclick="return confirm('Bạn chắc chắn?')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </div>
+      </td>
+    </tr>
+  @endforeach
+@endforeach
+
+
         </tbody>
       </table>
     </div>

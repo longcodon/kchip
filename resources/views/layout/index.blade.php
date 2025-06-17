@@ -15,7 +15,8 @@
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
-        
+        <a href="{{ route('donhang') }}">Đơn hàng</a>
+
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
@@ -54,19 +55,18 @@
   <section class="banner-slider">
     <div class="slider">
       <div class="slide active">
-        <img src="frontend/images/banner1.png" alt="Banner 1">
+        <img src="frontend/images/bn2.png" alt="Banner 1">
         <div class="slide-content">
-          <h2>Bộ sưu tập mùa hè 2023</h2>
-          <p>Giảm giá lên đến 50%</p>
-          <a href="#" class="btn">Mua ngay</a>
+          <h2>Khám phá KChipShop</h2>
+          <p>Nơi kết nối đam mê và trải nghiệm âm nhạc đỉnh cao </p>
         </div>
       </div>
       <div class="slide">
-        <img src="frontend/images/banner3.png" alt="Banner 2">
+        <img src="frontend/images/bn3.png" alt="Banner 2">
         <div class="slide-content">
-          <h2>Phong cách mới</h2>
-          <p>Đón đầu xu hướng</p>
-          <a href="#" class="btn">Khám phá</a>
+          <h2>Bàn Phím Điện Tử EASYPLAY1s</h2>
+          <p>được thiết kế dựa trên các phím đàn trong Sky</p>
+          <a href="#" class="btn">Mua Ngay</a>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
 
   <section class="notice-banner">
     <div class="notice-header" id="noticeToggle">
-      <strong>Important Update for U.S. Customers</strong>
+      <strong>Thông báo</strong>
       <i class="fas fa-chevron-down toggle-icon"></i>
     </div>
     <div class="notice-content" id="noticeContent">
@@ -86,26 +86,28 @@
     </div>
   </section>
 
+  
+
   <section class="featured-section">
     <h2>Video Nổi Bật</h2>
     <div class="featured-videos">
       <div class="video-wrapper">
-        <iframe src="https://www.youtube-nocookie.com/embed/mkA2XJmNTO8?controls=1&modestbranding=1&rel=0&disablekb=1&fs=0"
+        <iframe src="https://www.youtube.com/embed/AZZVxLj80Rk?si=fjoVVnxC751GQY12"
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
             class="minimal-youtube">
         </iframe>
-        <p class="video-title">[Sky Sheet-Free] カナタハルカ / Kanata Haruka</p>
+        <p class="video-title">[Sky Music] Phép Màu (OST Đàn Cá GỖ)</p>
       </div>
       <div class="video-wrapper">
-        <iframe src="https://www.youtube-nocookie.com/embed/mkA2XJmNTO8?controls=1&modestbranding=1&rel=0&disablekb=1&fs=0"
+        <iframe src="https://www.youtube.com/embed/WTH0Tctf600?si=_RMCe3TqaCWJ23sQ"
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
             class="minimal-youtube">
         </iframe>
-        <p class="video-title">[Sky Sheet-Free] カナタハルカ / Kanata Haruka</p>
+        <p class="video-title">[Sky Sheet-Free] Đừng Làm Trái Tim Anh Đau</p>
       </div>
       <div class="video-wrapper">
         <iframe src="https://www.youtube-nocookie.com/embed/mkA2XJmNTO8?controls=1&modestbranding=1&rel=0&disablekb=1&fs=0"

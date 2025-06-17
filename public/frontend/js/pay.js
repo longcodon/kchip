@@ -2,11 +2,11 @@
 
 
 const SERVICE_FEE = 5.00;
-const VALID_COUPONS = [
-    { code: "KCIP10", discount: 10, type: "percent" },
-    { code: "FREESHIP", discount: 5, type: "fixed" },
-    { code: "MUSIC20", discount: 20, type: "percent", minOrder: 50 }
-];
+// const VALID_COUPONS = [
+//     { code: "KCIP10", discount: 10, type: "percent" },
+//     { code: "FREESHIP", discount: 5, type: "fixed" },
+//     { code: "MUSIC20", discount: 20, type: "percent", minOrder: 50 }
+// ];
 
 let appliedCoupon = null;
 
@@ -46,38 +46,34 @@ function renderOrderItems() {
 
 // Áp dụng mã giảm giá
 function applyCoupon() {
-    const couponCode = document.getElementById('couponCode').value.trim();
-    const messageEl = document.getElementById('couponMessage');
+    const code = document.getElementById('couponCode').value.trim().toUpperCase();
+    const message = document.getElementById('couponMessage');
     const discountRow = document.getElementById('discountRow');
-    
-    // Reset
-    messageEl.textContent = '';
-    messageEl.className = 'coupon-message';
+    message.textContent = '';
     discountRow.style.display = 'none';
-    
-    if (!couponCode) {
-        showCouponMessage('Vui lòng nhập mã giảm giá', 'error');
+
+    if (!code) {
+        message.textContent = 'Vui lòng nhập mã giảm giá.';
+        message.style.color = 'red';
         return;
     }
-    
-    const validCoupon = VALID_COUPONS.find(coupon => coupon.code === couponCode);
-    
-    if (!validCoupon) {
-        showCouponMessage('Mã giảm giá không hợp lệ', 'error');
+
+    const found = VALID_COUPONS.find(coupon => coupon.code === code);
+    if (!found) {
+        message.textContent = 'Mã giảm giá không hợp lệ.';
+        message.style.color = 'red';
         return;
     }
-    
-    const subtotal = calculateSubtotal();
-    if (validCoupon.minOrder && subtotal < validCoupon.minOrder) {
-        showCouponMessage(`Áp dụng cho đơn hàng từ $${validCoupon.minOrder}`, 'error');
-        return;
-    }
-    
-    appliedCoupon = validCoupon;
-    showCouponMessage('Áp dụng mã giảm giá thành công!', 'success');
+
+    appliedCoupon = found;
+    message.textContent = `Áp dụng mã giảm ${found.discount}% thành công.`;
+    message.style.color = 'green';
     discountRow.style.display = 'flex';
+
     calculateTotal();
 }
+
+
 
 // Hiển thị thông báo mã giảm giá
 function showCouponMessage(message, type) {
@@ -100,8 +96,7 @@ function calculateTotal() {
     }
     
     const grandTotal = subtotal + SERVICE_FEE - discount;
-    
-    // Cập nhật giao diện
+
     document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
     document.getElementById('fee').textContent = `$${SERVICE_FEE.toFixed(2)}`;
     
@@ -113,7 +108,10 @@ function calculateTotal() {
     }
     
     document.getElementById('grandTotal').textContent = `$${grandTotal.toFixed(2)}`;
+
+    return grandTotal; // ❗❗❗ thêm dòng này để lấy tổng tiền khi cần
 }
+
 
 // Tính tổng phụ
 function calculateSubtotal() {

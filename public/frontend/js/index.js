@@ -100,13 +100,14 @@ function addToCart(name, price, imgSrc, author = "Không rõ") {
   renderCart();
 
   fetch(SAVE_CART_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ items: [newItem] })
-  })
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+  },
+  body: JSON.stringify({ items: cart }) // 👈 Gửi toàn bộ giỏ hàng
+})
+
   .then(res => res.json())
   .then(data => {
     if (!data.success) {
@@ -163,7 +164,46 @@ document.querySelectorAll('.coming-soon').forEach(item => {
   });
 });
 
-document.getElementById("cart-icon").addEventListener("click", toggleCart);
+document.getElementById("cart-icon").addEventListener("click", () => {
+  fetch("/get-cart")
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        renderCartFromServer(data.data);
+        document.getElementById("cartOverlay").style.display = "flex";
+      } else {
+        alert("Không thể tải giỏ hàng!");
+      }
+    })
+    .catch(err => {
+      console.error("Lỗi tải giỏ hàng:", err);
+    });
+});
+function renderCartFromServer(items) {
+  const cartItemsEl = document.getElementById("cartItems");
+  const cartTotalEl = document.getElementById("cartTotal");
+
+  let total = 0;
+  const html = items.map(item => {
+    const price = parseInt(item.price);
+    total += price;
+
+    return `
+      <div class="cart-item">
+        <img src="${item.img}" alt="${item.name}" />
+        <div class="cart-item-info">
+          <div><strong>${item.name}</strong></div>
+          <div>Giá: ${price.toLocaleString()} ₫</div>
+          <div>Số lượng: 1</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  cartItemsEl.innerHTML = html || "<p>Chưa có sản phẩm.</p>";
+  cartTotalEl.textContent = `${total.toLocaleString()} ₫`;
+}
+
 
 // Mã giảm giá
 const validCoupon = {
