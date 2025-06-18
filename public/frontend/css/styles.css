@@ -759,3 +759,123 @@ a {
     opacity: 1;
     visibility: visible;
 }
+
+/* Auth Buttons - Đẹp, đồng bộ với header */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 32px;
+}
+
+.btn-auth {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 22px;
+    border-radius: 22px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1.5px solid #d0eaf7;
+    background: #fff;
+    color: #222;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, box-shadow 0.25s, border 0.25s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.btn-auth i {
+    font-size: 16px;
+}
+
+.login-btn {
+    border: 1.5px solid #00d084;
+    background: #fff;
+    color: #00d084;
+}
+
+.login-btn:hover {
+    background: #e6f7ff;
+    color: #009e6e;
+    border-color: #00d084;
+}
+
+.register-btn {
+    border: 1.5px solid #00c3ff;
+    background: linear-gradient(90deg, #00d084 0%, #00c3ff 100%);
+    color: #fff;
+}
+
+.register-btn:hover {
+    background: linear-gradient(90deg, #00c3ff 0%, #00d084 100%);
+    color: #fff;
+    border-color: #00c3ff;
+    box-shadow: 0 4px 16px rgba(0,195,255,0.08);
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-btn {
+    background: #fff;
+    color: #222;
+    border: 2px solid #00d084;
+    border-radius: 30px;
+    padding: 8px 26px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.user-btn:hover {
+    background: #f0f0f0;
+    color: #00d084;
+    border-color: #00d084;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #fff;
+    min-width: 160px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    z-index: 100;
+    padding: 10px 0;
+}
+
+.user-dropdown:hover .dropdown-content,
+.user-dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a,
+.dropdown-content .logout-link {
+    display: block;
+    padding: 10px 24px;
+    color: #222;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover,
+.dropdown-content .logout-link:hover {
+    background: #f0f0f0;
+    color: #00d084;
+}

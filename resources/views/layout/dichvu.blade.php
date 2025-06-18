@@ -23,8 +23,8 @@
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
-         <a href="{{ route('donhang') }}">Đơn hàng</a>
-        
+        <a href="{{ route('donhang') }}">Đơn hàng</a>
+
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
@@ -36,27 +36,35 @@
         <i class="fas fa-user coming-soon"></i>
         <i class="fas fa-heart coming-soon"></i>
         <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
-         <div class="button-container">
- <div class="user-icons">
-    @auth
-        <div class="user-dropdown">
-            <button class="user-btn">
-                <i class="fas fa-user-circle"></i>
-                {{ Auth::user()->name }}
-            </button>
-            <div class="dropdown-content">
-                <a href="{{ route('profile.edit') }}">Hồ sơ</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="logout-link">Đăng xuất</button>
-                </form>
-            </div>
+        <div class="auth-buttons">
+            @auth
+              <div class="user-menu">
+                  <div class="user-avatar">
+                      <i class="fas fa-user"></i>
+                  </div>
+                  <span class="user-name">{{ Auth::user()->name }}</span>
+                  <i class="fas fa-chevron-down user-caret"></i>
+                  <div class="dropdown-content">
+                      <a href="{{ route('profile.edit') }}">Hồ sơ</a>
+                      <form method="POST" action="{{ route('logout') }}">
+                          @csrf
+                          <button type="submit" class="logout-link">Đăng xuất</button>
+                      </form>
+                  </div>
+              </div>
+            @else
+                <div class="button-container">
+                  <a href="{{ route('login') }}" class="menu-btn login-menu">
+                  <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập
+                  </a>
+              <a href="{{ route('register') }}" class="menu-btn register-menu">
+                  <i class="fas fa-user-plus"></i>
+                  Đăng ký
+              </a>
+          </div>
+            @endauth
         </div>
-    @else
-        <a href="{{ route('login') }}" class="login-btn">Đăng nhập</a>
-    @endauth
-</div>
-</div>
     </div>      
   </header>
 
