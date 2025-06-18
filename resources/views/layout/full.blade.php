@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header>
+    <header>
     <div class="logo"><span>KChip</span>Shop</div>
     <nav id="main-nav">
         <a href="{{ route('index') }}">Trang Chủ</a>
@@ -30,27 +30,35 @@
         <i class="fas fa-user coming-soon"></i>
         <i class="fas fa-heart coming-soon"></i>
         <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
-         <div class="button-container">
- <div class="user-icons">
-    @auth
-        <div class="user-dropdown">
-            <button class="user-btn">
-                <i class="fas fa-user-circle"></i>
-                {{ Auth::user()->name }}
-            </button>
-            <div class="dropdown-content">
-                <a href="{{ route('profile.edit') }}">Hồ sơ</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="logout-link">Đăng xuất</button>
-                </form>
-            </div>
+        <div class="auth-buttons">
+            @auth
+              <div class="user-menu">
+                  <div class="user-avatar">
+                      <i class="fas fa-user"></i>
+                  </div>
+                  <span class="user-name">{{ Auth::user()->name }}</span>
+                  <i class="fas fa-chevron-down user-caret"></i>
+                  <div class="dropdown-content">
+                      <a href="{{ route('profile.edit') }}">Hồ sơ</a>
+                      <form method="POST" action="{{ route('logout') }}">
+                          @csrf
+                          <button type="submit" class="logout-link">Đăng xuất</button>
+                      </form>
+                  </div>
+              </div>
+            @else
+                <div class="button-container">
+                  <a href="{{ route('login') }}" class="menu-btn login-menu">
+                  <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập
+                  </a>
+              <a href="{{ route('register') }}" class="menu-btn register-menu">
+                  <i class="fas fa-user-plus"></i>
+                  Đăng ký
+              </a>
+          </div>
+            @endauth
         </div>
-    @else
-        <a href="{{ route('login') }}" class="login-btn">Đăng nhập</a>
-    @endauth
-</div>
-</div>
     </div>      
   </header>
   <section class="notice-banner">
@@ -104,11 +112,9 @@
 
 <div class="product-gallery">
       <!-- SẢN PHẨM MẪU (có thể lặp để thêm) -->
-         @foreach($danhmuc as $key => $item)
+@foreach($danhmuc as $key => $item)
     @php
         $videoId = \Illuminate\Support\Str::after($item->link, 'v=');
-      //   print($videoId); 
-      // print($item->link);
     @endphp
 
     <div class="product-card" onclick="openModal(
@@ -119,15 +125,26 @@
         '{{ $item->author ?? 'Chưa rõ' }}',
         '{{ $item->transcribed ?? 'KChipShop' }}',
         'https://www.youtube.com/embed/{{ $videoId }}'
-
-
     )">
+    <span class="author-chip-corner">
+        <i class="fas fa-user-pen"></i>
+        {{ $item->transcribed ?? 'KChipShop' }}
+    </span>
         <div class="product-image">
             <img src="{{ $item->image ? asset('uploads/danhmuc/'.$item->image) : asset('/images/default.png') }}"
                  alt="{{ $item->title ?? '' }}" />
         </div>
         <h4>{{ $item->title ?? 'Sản phẩm mới' }}</h4>
-        <button class="price-btn">Xem sản phẩm</button>
+<span class="author-chip-modern">
+    <i class="fas fa-user-pen"></i>
+    {{ $item->transcribed ?? 'KChipShop' }}
+</span>
+        {{-- <div class="product-price" style="font-weight:600; color:#009dde; margin-bottom:10px;">
+            {{ isset($item->price) ? number_format($item->price, 0, ',', '.') . ' ₫' : 'Liên hệ' }}
+        </div> --}}
+        <button class="price-btn" style="font-weight:600; font-size:18px;">
+            {{ isset($item->price) ? number_format($item->price, 0, ',', '.') . ' ₫' : 'Liên hệ' }}
+        </button>
     </div>
 @endforeach
 

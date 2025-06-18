@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-primary">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3 class="card-title">Danh sách danh mục</h3>
+    <h3 class="card-title">Danh sách sheet nhạc</h3>
     <a href="{{ route('danhmuc.create') }}" class="btn btn-sm btn-success">
       <i class="fas fa-plus"></i> Thêm mới
     </a>

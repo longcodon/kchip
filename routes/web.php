@@ -15,6 +15,8 @@ use App\Http\Controllers\GiohangController;
 use App\Http\Controllers\DichvuController;
 use App\Http\Controllers\MaController;
 use App\Http\Controllers\DonhangController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +92,8 @@ Route::post('/save-cart', [GiohangController::class, 'saveCart'])->name('save.ca
 
 Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 
-
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.reset');
 
 

@@ -1,39 +1,47 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+{{-- filepath: c:\xampp\htdocs\kchip\resources\views\auth\reset-password.blade.php --}}
+@extends('layouts.guest')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-header">
+            <i class="fas fa-key"></i>
+            <h2>Đặt lại mật khẩu</h2>
         </div>
+        <form method="POST" action="{{ route('password.update') }}">
+            @csrf
+        @method('PUT')  
+            <input type="hidden" name="token" value="{{ $token }}">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <div class="input-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input id="email" type="email" name="email" value="{{ old('email', $email ?? request('email')) }}" required autofocus>
+                @error('email')
+                    <span class="input-error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="password"><i class="fas fa-lock"></i> Mật khẩu mới</label>
+                <input id="password" type="password" name="password" required autocomplete="new-password" placeholder="Nhập mật khẩu mới">
+                @error('password')
+                    <span class="input-error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="password_confirmation"><i class="fas fa-lock"></i> Xác nhận mật khẩu</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Nhập lại mật khẩu mới">
+                @error('password_confirmation')
+                    <span class="input-error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <button type="submit" class="login-submit" style="margin-top: 10px;">Đặt lại mật khẩu</button>
+        </form>
+        <div class="login-footer">
+            <a href="{{ route('login') }}">&#8592; Quay lại đăng nhập</a>
         </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

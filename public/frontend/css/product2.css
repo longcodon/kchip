@@ -68,6 +68,7 @@ body {
 .product-card {
   width: calc(20% - 20px);  /* 5 sản phẩm mỗi hàng trừ khoảng cách */
   min-width: 200px;
+
 }
 
 .product-card:hover {
@@ -188,4 +189,78 @@ body {
   font-size: 1em;
   color: #009dde;
   margin: 8px 0;
+}
+.tag-transcribed {
+    display: inline-block;
+    background: linear-gradient(90deg, #00b8d9 0%, #009dde 100%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 16px;
+    padding: 4px 14px 4px 10px;
+    margin: 8px 0 10px 0;
+    box-shadow: 0 2px 8px rgba(0,184,217,0.10);
+    letter-spacing: 0.2px;
+    vertical-align: middle;
+    transition: background 0.2s;
+}
+.tag-transcribed i {
+    margin-right: 6px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.author-chip-modern {
+    display: inline-flex;
+    align-items: center;
+    background: #f4f8fb;
+    color: #009dde;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 4px 14px 4px 10px;
+    margin: 10px 0 14px 0;
+    box-shadow: 0 1.5px 6px rgba(0,184,217,0.08);
+    letter-spacing: 0.1px;
+    border: 1px solid #e0f7fa;
+    gap: 7px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.author-chip-modern i {
+    font-size: 13px;
+    margin-right: 5px;
+    color: #00b8d9;
+}
+.author-chip-modern:hover {
+    background: #e0f7fa;
+    color: #007ba7;
+    border-color: #00b8d9;
+}
+
+.author-chip-corner {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    background: #f4f8fb;
+    color: #009dde;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 4px 14px 4px 10px;
+    box-shadow: 0 1.5px 6px rgba(0,184,217,0.08);
+    border: 1px solid #e0f7fa;
+    gap: 7px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.author-chip-corner i {
+    font-size: 13px;
+    margin-right: 5px;
+    color: #00b8d9;
+}
+.author-chip-corner:hover {
+    background: #e0f7fa;
+    color: #007ba7;
+    border-color: #00b8d9;
 }

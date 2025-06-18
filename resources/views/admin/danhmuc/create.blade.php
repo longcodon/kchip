@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-primary">
   <div class="card-header">
-    <h3 class="card-title">Tạo danh mục mới</h3>
+    <h3 class="card-title">Thêm Sheet nhạc</h3>
   </div>
   
   <form method="POST" action="{{ route('danhmuc.store') }}" enctype="multipart/form-data">
@@ -112,7 +112,7 @@
     
     <div class="card-footer">
       <button type="submit" class="btn btn-primary">
-        <i class="fas fa-save"></i> Lưu danh mục
+        <i class="fas fa-save"></i> Lưu
       </button>
       <a href="{{ route('danhmuc.index') }}" class="btn btn-default float-right">
         <i class="fas fa-times"></i> Hủy bỏ

@@ -11,10 +11,10 @@
   <header>
     <div class="logo"><span>KChip</span>Shop</div>
     <nav id="main-nav">
-        <a href="{{ route('welcome') }}">Trang Chủ</a>
+        <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
-        <a href="#"class="coming-soon">Dịch Vụ</a>
-        <a href="#"class="coming-soon">Diễn Đàn</a>
+        <a href="{{ route('dichvu') }}">Dịch Vụ</a>
+
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
@@ -26,11 +26,17 @@
         <i class="fas fa-user coming-soon"></i>
         <i class="fas fa-heart coming-soon"></i>
         <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
-         <div class="button-container">
-  <button     onclick="window.location.href='{{ route('login') }}'" class="login-btn">Đăng nhập</button>
-  <button  onclick="window.location.href='{{ route('register') }}'" class="register-btn">Đăng ký</button>
-</div>
-    </div>      
+        <div class="button-container">
+            <a href="{{ route('login') }}" class="menu-btn login-menu">
+                <i class="fas fa-sign-in-alt"></i>
+                Đăng nhập
+            </a>
+            <a href="{{ route('register') }}" class="menu-btn register-menu">
+                <i class="fas fa-user-plus"></i>
+                Đăng ký
+            </a>
+        </div>
+    </div>
   </header>
 
   <section class="banner-slider">
