@@ -140,10 +140,7 @@
                  alt="{{ $item->title ?? '' }}" />
         </div>
         <h4>{{ $item->title ?? 'Sản phẩm mới' }}</h4>
-<span class="author-chip-modern">
-    <i class="fas fa-user-pen"></i>
-    {{ $item->transcribed ?? 'KChipShop' }}
-</span>
+
         {{-- <div class="product-price" style="font-weight:600; color:#009dde; margin-bottom:10px;">
             {{ isset($item->price) ? number_format($item->price, 0, ',', '.') . ' ₫' : 'Liên hệ' }}
         </div> --}}
