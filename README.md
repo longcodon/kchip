@@ -1,15 +1,3 @@
-Cảm ơn bạn. Mình sẽ soạn một README.md chi tiết bằng tiếng Việt cho dự án KChipShop – một website bán sheet nhạc trong game Sky, bao gồm:
-
-* Giới thiệu dự án
-* Tính năng chính
-* Cấu trúc thư mục
-* Hướng dẫn cài đặt và chạy trên localhost
-* Ví dụ sử dụng
-* Thông tin đóng góp và nhóm phát triển.
-
-Mình sẽ gửi lại nội dung sớm nhất có thể.
-
-
 # KChipShop – Website Bán Sheet Nhạc cho Sky: Children of the Light
 
 &#x20;*Giao diện trang chủ của KChipShop với banner giới thiệu và các nội dung nổi bật cho người chơi Sky.*
