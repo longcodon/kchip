@@ -6,6 +6,304 @@
     <title>Thanh Toán | KChip</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="frontend/css/pay.css">
+    <style>
+body {
+    background: #f6fafd;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.07);
+    padding: 0;
+}
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 20px;
+}
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #009dde;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.header nav a {
+    color: #222;
+    text-decoration: none;
+    margin: 0 18px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.header nav a.active, .header nav a:hover {
+    color: #009dde;
+}
+.cart-icon {
+    position: relative;
+    font-size: 1.5rem;
+    color: #009dde;
+}
+.cart-count {
+    position: absolute;
+    top: -10px; right: -12px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 7px;
+    min-width: 22px;
+    text-align: center;
+    line-height: 18px;
+}
+.payment-container .container {
+    max-width: 1100px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,157,222,0.08);
+    padding: 32px 24px;
+}
+.page-title {
+    font-size: 2.2rem;
+    color: #009dde;
+    margin-bottom: 28px;
+    text-align: center;
+    font-weight: 700;
+}
+.payment-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+.customer-info, .order-summary {
+    flex: 1 1 340px;
+    background: #fafdff;
+    border-radius: 14px;
+    padding: 28px 22px;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.04);
+}
+.customer-info h2, .order-summary h2 {
+    font-size: 1.3rem;
+    color: #009dde;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+.form-group {
+    margin-bottom: 18px;
+}
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cce6f6;
+    border-radius: 7px;
+    font-size: 1rem;
+    background: #fff;
+    margin-top: 3px;
+    transition: border 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #009dde;
+    outline: none;
+}
+.invalid-feedback {
+    color: #e74c3c;
+    font-size: 0.95em;
+    margin-top: 2px;
+}
+.order-items {
+    margin-bottom: 18px;
+}
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaf3fa;
+}
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.item-info img {
+    border-radius: 8px;
+    border: 1px solid #e0f7fa;
+    width: 50px; height: 50px; object-fit: cover;
+}
+.item-info h3 {
+    font-size: 1.05rem;
+    margin: 0 0 2px 0;
+    font-weight: 600;
+}
+.item-info p {
+    margin: 0;
+    color: #009dde;
+    font-size: 0.98rem;
+}
+.item-price {
+    font-weight: 600;
+    color: #222;
+    font-size: 1.05rem;
+}
+.discount-section {
+    margin: 18px 0 10px 0;
+    background: #f3fbff;
+    border-radius: 8px;
+    padding: 14px 12px;
+}
+.coupon-input {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.coupon-input input {
+    flex: 1;
+    border-radius: 6px;
+    border: 1px solid #cce6f6;
+    padding: 8px 10px;
+    font-size: 1rem;
+}
+.coupon-input button {
+    background: linear-gradient(90deg, #00c3ff 0%, #00d084 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.coupon-input button:hover {
+    background: linear-gradient(90deg, #00d084 0%, #00c3ff 100%);
+}
+.coupon-message {
+    font-size: 0.98em;
+    min-height: 18px;
+}
+.payment-methods {
+    margin: 18px 0 10px 0;
+}
+.method-options {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+.method-option {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #fafdff;
+    border: 1.5px solid #cce6f6;
+    border-radius: 8px;
+    padding: 7px 16px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.method-option input[type="radio"] {
+    accent-color: #009dde;
+    margin-right: 4px;
+}
+.method-option img {
+    width: 28px; height: 28px; object-fit: contain;
+}
+.method-option:hover, .method-option input:checked + img {
+    border-color: #009dde;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.08);
+}
+.order-total {
+    margin-top: 18px;
+    background: #fafdff;
+    border-radius: 8px;
+    padding: 14px 12px;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.04);
+}
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+    font-size: 1.05rem;
+}
+.total-row.grand-total {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #009dde;
+}
+#discountRow {
+    color: #e74c3c;
+}
+#grandTotal {
+    font-size: 1.2em;
+}
+#finalPayBtn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 0;
+    background: linear-gradient(90deg, #00c3ff 0%, #00d084 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.08);
+}
+#finalPayBtn:hover {
+    background: linear-gradient(90deg, #00d084 0%, #00c3ff 100%);
+}
+.secure-notice {
+    margin-top: 14px;
+    color: #009dde;
+    font-size: 0.98em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.footer {
+    background: #fff;
+    border-top: 1px solid #eaf3fa;
+    margin-top: 40px;
+    padding: 18px 0 0 0;
+}
+.footer .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.social-links a {
+    color: #009dde;
+    font-size: 1.3rem;
+    margin-left: 12px;
+    transition: color 0.2s;
+}
+.social-links a:hover {
+    color: #e74c3c;
+}
+@media (max-width: 900px) {
+    .payment-grid { flex-direction: column; gap: 18px; }
+    .payment-container .container { padding: 18px 4px; }
+    .customer-info, .order-summary { padding: 18px 8px; }
+    .footer .container { flex-direction: column; gap: 10px; }
+}
+</style>
 </head>
 <body>
     <header class="header">
@@ -13,7 +311,6 @@
             <a href="index.html" class="logo">KChip</a>
             <nav>
                 <a href="{{ route('index') }}">Trang chủ</a>
-                <a href="service.html">Dịch vụ</a>
                 <a href="#" class="active">Thanh toán</a>
             </nav>
             <div class="cart-icon">

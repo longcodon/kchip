@@ -1,0 +1,135 @@
+.login-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4fbff;
+}
+
+.login-card {
+    background: #fff;
+    padding: 36px 32px 28px 32px;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0,157,222,0.08);
+    width: 100%;
+    max-width: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.login-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #009dde;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #009dde;
+    margin-bottom: 6px;
+    font-size: 15px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e0f5ff;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s;
+    background: #f8fdff;
+}
+
+.form-control:focus {
+    border-color: #00b8d9;
+    background: #fff;
+}
+
+.input-error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+}
+
+.options {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.remember-me input[type="checkbox"] {
+    accent-color: #00b8d9;
+    margin-right: 4px;
+}
+
+.forgot-link {
+    color: #00b8d9;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-link:hover {
+    color: #00995c;
+    text-decoration: underline;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 11px 0;
+    background: linear-gradient(90deg, #00c3ff 0%, #00d084 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.08);
+    margin-bottom: 10px;
+}
+
+.login-submit:hover {
+    background: linear-gradient(90deg, #00d084 0%, #00c3ff 100%);
+    box-shadow: 0 4px 16px rgba(0,157,222,0.12);
+}
+
+.login-footer {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+.login-footer a {
+    color: #00b8d9;
+    font-weight: 600;
+    margin-left: 4px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.login-footer a:hover {
+    color: #00995c;
+    text-decoration: underline;
+}

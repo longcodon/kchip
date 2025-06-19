@@ -71,6 +71,17 @@ function renderCart() {
   const sum = cart.reduce((acc, item) => acc + parsePrice(item.price), 0);
   const discounted = sum * (1 - appliedDiscount / 100);
   total.textContent = `${discounted.toLocaleString()} ₫`;
+  html += `
+<div class="cart-item" style="display:flex;align-items:center;margin-bottom:18px;border-bottom:1px solid #f3f3f3;padding-bottom:10px;">
+    <img src="${item.image}" alt="" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-right:12px;border:1px solid #e0f7fa;">
+    <div style="flex:1;">
+        <div style="font-weight:600;color:#222;font-size:15px;margin-bottom:2px;">${item.name}</div>
+        <div style="color:#009dde;font-size:14px;">Giá: ${item.price}</div>
+        <div style="color:#888;font-size:13px;">Số lượng: 1</div>
+    </div>
+    <button class="cart-remove-x" data-id="${item.id}" style="background:none;border:none;color:#e74c3c;font-size:22px;cursor:pointer;margin-left:8px;">&times;</button>
+</div>
+`;
 }
 function removeFromCart(name) {
   const index = cart.findIndex(item => item.name === name);

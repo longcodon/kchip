@@ -18,48 +18,49 @@
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
         <a href="{{ route('donhang') }}">Đơn hàng</a>
-
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
     </div>
-    <div class="user-icons">
-{{--  
-         <i class="fas fa-search coming-soon"></i>
-
-        <i class="fas fa-user coming-soon"></i>
-        <i class="fas fa-heart coming-soon"></i>
-        <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
-        <div class="auth-buttons">
-            @auth
-              <div class="user-menu">
-                  <div class="user-avatar">
-                      <i class="fas fa-user"></i>
-                  </div>
-                  <span class="user-name">{{ Auth::user()->name }}</span>
-                  <i class="fas fa-chevron-down user-caret"></i>
-                  <div class="dropdown-content">
-                      <a href="{{ route('profile.edit') }}">Hồ sơ</a>
-                      <form method="POST" action="{{ route('logout') }}">
-                          @csrf
-                          <button type="submit" class="logout-link">Đăng xuất</button>
-                      </form>
-                  </div>
-              </div>
-            @else
-                <div class="button-container">
-                  <a href="{{ route('login') }}" class="menu-btn login-menu">
-                  <i class="fas fa-sign-in-alt"></i>
+<div class="user-icons" style="display: flex; align-items: center; gap: 18px;">
+    <div style="position:relative;display:inline-block;">
+        <i class="fas fa-shopping-cart" id="cart-icon" style="position:relative;font-size:22px;cursor:pointer;">
+            <span id="cart-count"
+                style="position:absolute;top:-8px;right:-10px;background:#009dde;color:#fff;font-size:13px;font-weight:bold;border-radius:50%;padding:2px 7px;min-width:22px;text-align:center;line-height:18px;">
+                0
+            </span>
+        </i>
+    </div>
+    <div class="auth-buttons">
+        @auth
+            <div class="user-menu">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="user-name">{{ Auth::user()->name }}</span>
+                <i class="fas fa-chevron-down user-caret"></i>
+                <div class="dropdown-content">
+                    <a href="{{ route('profile.edit') }}">Hồ sơ</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="logout-link">Đăng xuất</button>
+                    </form>
+                </div>
+            </div>
+        @else
+            <div class="button-container">
+                <a href="{{ route('login') }}" class="menu-btn login-menu">
+                    <i class="fas fa-sign-in-alt"></i>
                     Đăng nhập
-                  </a>
-              <a href="{{ route('register') }}" class="menu-btn register-menu">
-                  <i class="fas fa-user-plus"></i>
-                  Đăng ký
-              </a>
-          </div>
-            @endauth
-        </div>
-    </div>      
+                </a>
+                <a href="{{ route('register') }}" class="menu-btn register-menu">
+                    <i class="fas fa-user-plus"></i>
+                    Đăng ký
+                </a>
+            </div>
+        @endauth
+    </div>
+</div>
   </header>
   <section class="notice-banner">
     <div class="notice-header" id="noticeToggle">
@@ -226,31 +227,26 @@
   
   <!-- Giỏ hàng popup -->
 
-  <div class="cart-overlay" id="cartOverlay">
+<div class="cart-overlay" id="cartOverlay">
     <div class="cart-panel">
-      <div class="cart-header">
-        <h3>Giỏ hàng</h3>
-        <span class="close-cart" onclick="toggleCart()">&times;</span>
-      </div>
-      <div class="cart-items" id="cartItems"></div>
-      <div class="cart-footer">
-        {{-- <div class="discount-code">
-            <input type="text" placeholder="Nhập mã giảm giá" />
-            <button class="apply-coupon-btn " onclick="applyCoupon()" >Áp dụng</button>
-        </div> --}}
-        <div class="cart-total">
-          <span>Tổng cộng:</span>
-          <strong id="cartTotal">0 ₫</strong>
+        <div class="cart-header">
+            <h3>Giỏ hàng</h3>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
         </div>
-        <button class="checkout-btn" onclick="window.location.href='{{ route('pay') }}'" >Thanh toán</button>
-      </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <strong id="cartTotal">0 ₫</strong>
+            </div>
+            <button class="checkout-btn" onclick="window.location.href='{{ route('pay') }}'">Thanh toán</button>
+        </div>
     </div>
-  </div>
+</div>
 
   
    
   <script src="{{asset('frontend/js/index.js')}}"></script>
-  <script src="{{asset('frontend/js/product2.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
   const SAVE_CART_URL = "{{ url('/save-cart') }}";
@@ -259,6 +255,6 @@
 <script>
     const PAY_URL = "{{ route('pay') }}";
 </script>
-
+ <script src="{{ asset('frontend/js/product2.js') }}"></script>
 </body>
 </html>
