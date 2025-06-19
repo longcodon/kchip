@@ -240,30 +240,42 @@ public function vnpayReturn(Request $request)
 
 
 
-    //code
-    public function cod_payment(Request $request)
+    //cod
+  public function cod_payment(Request $request)
 {
-    // Tạo đơn hàng thanh toán COD
     $Giohang = Giohang::all();
-    foreach ($Giohang as $item) {
-        Khachhang::create([
-            'name' => $request->input('name') ?? 'Không rõ',
-            'email' => $request->input('email') ?? '',
-            'fb' => $request->input('fb') ?? '',
-            'note' => $request->input('note') ?? '',
-            'status' => 1,
-            'trangthai' => 'chờ xác nhận',
-            'title' => $item->name,
-            'author' => $item->author ?? 'Không rõ',
-            'price' => $item->price,
-            'img' => $item->img ?? '',
-        ]);
+
+    if ($Giohang->isEmpty()) {
+        return back()->with('error', 'Không có sản phẩm nào trong giỏ hàng.');
     }
 
-    // Xoá giỏ hàng
+    // ✅ Tính tổng giá đơn hàng + phí dịch vụ
+    $subtotal = $Giohang->sum(fn($item) => $item->price * ($item->quantity ?? 1));
+    $serviceFee = 5000;
+    $total = $subtotal + $serviceFee;
+
+    // ✅ Tạo mô tả đầy đủ danh sách sản phẩm
+    $title = $Giohang->map(fn($item) => "{$item->name} x" . ($item->quantity ?? 1))->implode(', ');
+
+    // ✅ Lưu vào DB 1 dòng duy nhất
+    Khachhang::create([
+        'name' => $request->input('name') ?? 'Không rõ',
+        'email' => $request->input('email') ?? '',
+        'fb' => $request->input('fb') ?? '',
+        'note' => $request->input('note') ?? '',
+        'status' => 1,
+        'trangthai' => 'thucod', // ✅ trạng thái đúng cho COD
+        'title' => $title,
+        'author' => 'KChip',
+        'price' => $total,
+        'img' => $Giohang->first()->img ?? '',
+    ]);
+
+    // ✅ Xoá giỏ hàng
     Giohang::truncate();
 
-    return redirect()->route('index')->with('success', 'Đặt hàng thành công! Nhân viên sẽ sớm liên hệ.');
+    return redirect()->route('index')->with('success', 'Đặt hàng COD thành công! Nhân viên sẽ sớm liên hệ.');
 }
+
 
 }

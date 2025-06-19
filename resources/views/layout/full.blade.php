@@ -25,10 +25,10 @@
 <div class="user-icons" style="display: flex; align-items: center; gap: 18px;">
     <div style="position:relative;display:inline-block;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="position:relative;font-size:22px;cursor:pointer;">
-            <span id="cart-count"
+            {{-- <span id="cart-count"
                 style="position:absolute;top:-8px;right:-10px;background:#009dde;color:#fff;font-size:13px;font-weight:bold;border-radius:50%;padding:2px 7px;min-width:22px;text-align:center;line-height:18px;">
                 0
-            </span>
+            </span> --}}
         </i>
     </div>
     <div class="auth-buttons">

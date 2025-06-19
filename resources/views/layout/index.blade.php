@@ -74,7 +74,7 @@
         <div class="slide-content">
           <h2>Bàn Phím Điện Tử EASYPLAY1s</h2>
           <p>được thiết kế dựa trên các phím đàn trong Sky</p>
-          <a href="#" class="btn">Mua Ngay</a>
+          <a href="https://www.kickstarter.com/projects/summertones/easyplay-1s-pocket-sized-passion-easy-play-inspiration" class="btn">Mua Ngay</a>
         </div>
       </div>
     </div>

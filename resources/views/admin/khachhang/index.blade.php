@@ -59,7 +59,8 @@
 @foreach ($orders as $groupTime => $group)
   <tr>
     <td colspan="12" style="background: #f0f0f0; font-weight: bold;">
-      🧾 Đơn hàng lúc {{ \Carbon\Carbon::parse($groupTime)->format('d/m/Y H:i:s') }} — {{ $group->count() }} sản phẩm
+      🧾 Đơn hàng lúc {{ \Carbon\Carbon::parse($groupTime)->format('d/m/Y H:i:s') }} 
+      {{-- 🧾 Đơn hàng lúc {{ \Carbon\Carbon::parse($groupTime)->format('d/m/Y H:i:s') }} — {{ $group->count() }} sản phẩm --}}
     </td>
   </tr>
 
@@ -83,7 +84,13 @@
 
 
         <td>
-        <span class="badge badge-success">Đã thanh toán</span>
+        <span class="badge badge-success">
+          @if($item->trangthai == 'thucod')
+            THU COD
+         @else 
+          Đã thanh toán
+           @endif
+        </span>
       </td>
       
 <td>

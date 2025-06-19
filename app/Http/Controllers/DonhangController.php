@@ -8,9 +8,8 @@ class DonhangController extends Controller
 {
 public function index()
 {
-    // Lấy đơn hàng mới nhất của người dùng (tuỳ logic bạn)
-    $donhang = Khachhang::latest()->first();
-
+    $donhang = Khachhang::orderBy('created_at', 'desc')->get();
     return view('layout.donhang', compact('donhang'));
 }
 }
+
