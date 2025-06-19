@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>That Sky Shop Clone</title>
+  <title>KChipShop</title>
   <link rel="stylesheet" href="{{asset('frontend/css/index.css')}}" />
   <link rel="stylesheet" href="{{asset('frontend/css/product2.css')}}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -81,17 +81,21 @@
     <select id="filter-author" name="transcribed" onchange="this.form.submit()">
       <option value="">Tất cả</option>
       <option value="kchip" {{ request('transcribed') == 'kchip' ? 'selected' : '' }}>KChip</option>
-      <option value="kteam" {{ request('transcribed') == 'kteam' ? 'selected' : '' }}>KTeam</option>
+      <option value="Nhiều thành viên" {{ request('transcribed') == 'Nhiều thành viên' ? 'selected' : '' }}>Nhiều thành viên</option>
     </select>
   </div>
 
   <div>
-    <label for="filter-type">Thể loại:</label>
-    <select id="filter-type" name="country" onchange="this.form.submit()">
-      <option value="">Tất cả</option>
-      <option value="VN" {{ request('country') == 'VN' ? 'selected' : '' }}>Việt Nam</option>
-      <option value="khac" {{ request('country') == 'khac' ? 'selected' : '' }}>Khác</option>
-    </select>
+      <label for="filter-type">Quốc gia:</label>
+      <select id="filter-type" name="country" onchange="this.form.submit()">
+          <option value="">Tất cả</option>
+          <option value="VN" {{ request('country') == 'VN' ? 'selected' : '' }}>Việt Nam</option>
+          <option value="US" {{ request('country') == 'US' ? 'selected' : '' }}>Mỹ</option>
+          <option value="KR" {{ request('country') == 'KR' ? 'selected' : '' }}>Hàn Quốc</option>
+          <option value="JP" {{ request('country') == 'JP' ? 'selected' : '' }}>Nhật Bản</option>
+          <option value="CN" {{ request('country') == 'CN' ? 'selected' : '' }}>Trung Quốc</option>
+          <option value="OTHER" {{ request('country') == 'OTHER' ? 'selected' : '' }}>Khác</option>
+      </select>
   </div>
 
   <div class="sort">
