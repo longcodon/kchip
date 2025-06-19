@@ -132,7 +132,7 @@
   <section class="product-gallery-section">
     <h2 class="section-title">Sản Phẩm</h2>
     <div class="product-gallery">
-    @foreach($danhmuc as $key => $item)
+    @foreach($danhmuc->take(10) as $key => $item)
     @php
         $videoId = \Illuminate\Support\Str::after($item->link, 'v=');
       //   print($videoId); 
@@ -162,7 +162,7 @@
 
 
     <div class="see-more-wrapper">
-      <button onclick="window.location.href='{{ route('full') }}'" class="see-more-btn coming-soon"> Tất Cả</button>
+      <button onclick="window.location.href='{{ route('full') }}'" class="see-more-btn"> Tất Cả</button>
     </div>
   </section>
 

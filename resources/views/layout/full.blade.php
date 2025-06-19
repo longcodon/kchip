@@ -122,7 +122,7 @@
         $videoId = \Illuminate\Support\Str::after($item->link, 'v=');
     @endphp
 
-    <div class="product-card" onclick="openModal(
+    <div class="product-card product-card-js" onclick="openModal(
         '{{ $item->title ?? 'Không có tên' }}',
         '{{ $item->image ? asset('uploads/danhmuc/'.$item->image) : asset('/images/default.png') }}',
         '{{ $item->description ?? 'Đang cập nhật mô tả' }}',
@@ -257,5 +257,52 @@
     const PAY_URL = "{{ route('pay') }}";
 </script>
  <script src="{{ asset('frontend/js/product2.js') }}"></script>
+ <script>
+// Phân trang sản phẩm
+document.addEventListener('DOMContentLoaded', function() {
+    const products = Array.from(document.querySelectorAll('.product-card-js'));
+    const perPage = 15;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / perPage);
+    const pagination = document.getElementById('pagination');
+
+    function showPage(page) {
+        products.forEach((el, idx) => {
+            el.style.display = (idx >= (page-1)*perPage && idx < page*perPage) ? '' : 'none';
+        });
+        renderPagination(page);
+    }
+
+    function renderPagination(page) {
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+        let html = `<nav class="paging-nav"><ul class="paging-list">`;
+        // Prev
+        html += `<li><button ${page === 1 ? 'disabled' : ''} onclick="gotoPage(${page-1})" class="paging-btn paging-prev">&lt;</button></li>`;
+        // Số trang
+        for(let i=1; i<=totalPages; i++) {
+            html += `<li><button class="paging-btn${i===page?' active':''}" onclick="gotoPage(${i})">${i}</button></li>`;
+        }
+        // Next
+        html += `<li><button ${page === totalPages ? 'disabled' : ''} onclick="gotoPage(${page+1})" class="paging-btn paging-next">&gt;</button></li>`;
+        html += `</ul></nav>`;
+        pagination.innerHTML = html;
+    }
+
+    window.gotoPage = function(page) {
+        if(page < 1 || page > totalPages) return;
+        currentPage = page;
+        showPage(page);
+        window.scrollTo({top: document.querySelector('.all-products').offsetTop-40, behavior:'smooth'});
+    }
+
+    // Khởi tạo
+    if(products.length > 0) {
+        showPage(1);
+    }
+});
+</script>
 </body>
 </html>
