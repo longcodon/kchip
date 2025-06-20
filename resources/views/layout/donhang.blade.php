@@ -41,6 +41,12 @@
       margin-bottom: 20px;
     }
 
+    .sheet-intro {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 20px;
+    }
+
     .sheet-intro p {
       margin: 6px 0;
     }
@@ -83,18 +89,11 @@
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
         <a href="{{ route('donhang') }}">Đơn hàng</a>
-
     </nav>
     <div class="menu-toggle" id="menu-toggle">
         <i class="fas fa-bars"></i>
     </div>
     <div class="user-icons">
-{{--  
-         <i class="fas fa-search coming-soon"></i>
-
-        <i class="fas fa-user coming-soon"></i>
-        <i class="fas fa-heart coming-soon"></i>
-        <i class="fas fa-shopping-cart " id="cart-icon"></i> --}}
         <div class="auth-buttons">
             @auth
               <div class="user-menu">
@@ -130,34 +129,46 @@
   <!-- ✅ Nội dung chính -->
   <section class="custom-sheet-section">
     <div class="sheet-container">
-      <h2 class="sheet-title">TÌNH TRẠNG ĐƠN HÀNG</h2>
+      <h2 class="sheet-title">TẤT CẢ ĐƠN HÀNG</h2>
 
-      @if(isset($donhang))
-        <div class="sheet-intro">
-          <p><strong>👤 Họ tên:</strong> {{ $donhang->name }}</p>
-          <p><strong>📧 Email:</strong> {{ $donhang->email }}</p>
-          @if($donhang->fb)
-            <p><strong>🔗 Facebook:</strong> <a href="{{ $donhang->fb }}" target="_blank">{{ $donhang->fb }}</a></p>
-          @endif
-          @if($donhang->note)
-            <p><strong>📝 Ghi chú:</strong> {{ $donhang->note }}</p>
-          @endif
-          <p><strong>📦 Trạng thái:</strong> <span style="color: blue;">{{ $donhang->trangthai ?? 'Chưa xử lý' }}</span></p>
+      @if($donhang->count())
+        @foreach($donhang as $item)
+          <div class="sheet-intro">
+            <p><strong>👤 Họ tên:</strong> {{ $item->name }}</p>
+            <p><strong>📧 Email:</strong> {{ $item->email }}</p>
+            <p><strong>📦 Sản phẩm:</strong> {{ $item->title}}</p>
+            @if($item->fb)
+              <p><strong>🔗 Facebook:</strong> <a href="{{ $item->fb }}" target="_blank">{{ $item->fb }}</a></p>
+             @endif
+            @if($item->note)
+              <p><strong>📝 Ghi chú:</strong> {{ $item->note }}</p>
+            @endif
+            <p><strong>✅ Phương thức thanh toán:</strong> <span style="color: blue;">{{ $item->trangthai ?? 'Chưa xử lý' }}</span></p>
 
-          @if($donhang->trangthai == 'đã xác nhận')
-            <div class="alert alert-success">✅ Đơn hàng đã được xác nhận, khách yêu chờ nhé!</div>
-          @elseif($donhang->trangthai == 'đã gửi hàng')
-            <div class="alert alert-warning">🚚 Đơn hàng đã đến tay, check mail thui nào!</div>
-          @else
-            <div class="alert alert-info">ℹ️ Trạng thái đơn hàng: {{ $donhang->trangthai }}</div>
-          @endif
-        </div>
+            @if($item->trangthai == 'đã xác nhận')
+              <div class="alert alert-success">✅ Đơn hàng đã được xác nhận, khách yêu chờ nhé!</div>
+            @elseif($item->trangthai == 'đã gửi hàng')
+              <div class="alert alert-warning">🚚 Đơn hàng đã đến tay, check mail thui nào!</div>
+            @else
+              <div class="alert alert-info">ℹ️ Trạng thái đơn hàng: 
+                
+                @if($item->trangthai=='thucod') 
+                  chờ xác nhận 
+                @else 
+                đã xác nhận
+                @endif
+              
+              </div>
+            @endif
+           
+          </div>
+        @endforeach
       @else
-        <p>Không tìm thấy đơn hàng. Vui lòng kiểm tra lại!</p>
+        <p>Không tìm thấy đơn hàng nào.</p>
       @endif
 
       <p class="sheet-contact" style="margin-top: 25px;">
-        📩 Liên hệ Fanpage: <a href="#">link</a>
+        📩 Liên hệ Fanpage: <a href="https://www.facebook.com/profile.php?id=100083202309058">link</a>
       </p>
     </div>
   </section>

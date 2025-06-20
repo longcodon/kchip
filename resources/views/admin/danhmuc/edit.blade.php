@@ -60,10 +60,13 @@
           <div class="form-group">
             <label for="country">Quốc gia <span class="text-danger">*</span></label>
             <select name="country" class="form-control @error('country') is-invalid @enderror" id="country">
-              <option value="">-- Chọn quốc gia --</option>
-              <option value="VN" {{ old('country', $danhmuc->country) == 'VN' ? 'selected' : '' }}>Việt Nam</option>
-              <option value="US" {{ old('country', $danhmuc->country) == 'US' ? 'selected' : '' }}>Mỹ</option>
-              <!-- Thêm các quốc gia khác -->
+                <option value="">-- Chọn quốc gia --</option>
+                <option value="VN" {{ old('country', $danhmuc->country) == 'VN' ? 'selected' : '' }}>Việt Nam</option>
+                <option value="US" {{ old('country', $danhmuc->country) == 'US' ? 'selected' : '' }}>Mỹ</option>
+                <option value="KR" {{ old('country', $danhmuc->country) == 'KR' ? 'selected' : '' }}>Hàn Quốc</option>
+                <option value="JP" {{ old('country', $danhmuc->country) == 'JP' ? 'selected' : '' }}>Nhật Bản</option>
+                <option value="CN" {{ old('country', $danhmuc->country) == 'CN' ? 'selected' : '' }}>Trung Quốc</option>
+                <option value="OTHER" {{ old('country', $danhmuc->country) == 'OTHER' ? 'selected' : '' }}>Khác</option>
             </select>
             @error('country')
               <div class="invalid-feedback">{{ $message }}</div>

@@ -23,7 +23,9 @@
         <a href="{{ route('index') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
-        <a href="{{ route('donhang') }}">Đơn hàng</a>
+        <a href="#" onclick="checkLogin(event)">Đơn hàng</a>
+
+
 
     </nav>
     <div class="menu-toggle" id="menu-toggle">
@@ -144,7 +146,31 @@
 </script>
 
 
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function checkLogin(event) {
+        event.preventDefault();
+        @auth
+            // Nếu đã đăng nhập thì chuyển trang
+            window.location.href = "{{ route('donhang') }}";
+        @else
+            // Nếu chưa đăng nhập thì hiện toast và chuyển sau 2s
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn cần đăng nhập để xem đơn hàng!',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true,
+                position: 'top-end',
+                timerProgressBar: true,
+                didClose: () => {
+                    window.location.href = "{{ route('login') }}";
+                }
+            });
+        @endauth
+    }
+</script>
+
 </body>
 
 </html>

@@ -1,0 +1,124 @@
+body {
+    background: #f4fbff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.forgot-bg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.forgot-card {
+    background: #fff;
+    padding: 36px 32px 28px 32px;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0,157,222,0.08);
+    width: 100%;
+    max-width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.forgot-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.kchipshop-logo {
+    font-size: 2rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+.forgot-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #009dde;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+.forgot-desc {
+    color: #555;
+    font-size: 15px;
+    margin-top: 6px;
+    margin-bottom: 0;
+    text-align: center;
+}
+.form-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+.form-group label {
+    font-weight: 600;
+    color: #009dde;
+    margin-bottom: 6px;
+    font-size: 15px;
+    display: block;
+}
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e0f5ff;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s;
+    background: #f8fdff;
+}
+.form-input:focus {
+    border-color: #00b8d9;
+    background: #fff;
+}
+.input-error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+}
+.forgot-btn {
+    width: 100%;
+    padding: 11px 0;
+    background: linear-gradient(90deg, #00c3ff 0%, #00d084 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,157,222,0.08);
+    margin-bottom: 10px;
+}
+.forgot-btn:hover {
+    background: linear-gradient(90deg, #00d084 0%, #00c3ff 100%);
+    box-shadow: 0 4px 16px rgba(0,157,222,0.12);
+}
+.forgot-footer {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+.forgot-footer a {
+    color: #00b8d9;
+    font-weight: 600;
+    margin-left: 4px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.forgot-footer a:hover {
+    color: #00995c;
+    text-decoration: underline;
+}
+.forgot-success {
+    width: 100%;
+    background: #e0f7fa;
+    color: #009dde;
+    border-radius: 7px;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 15px;
+}

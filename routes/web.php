@@ -51,7 +51,10 @@ Route::get('/full/',[App\Http\Controllers\FullController::class,'index'])->name(
 Route::get('/pay/',[App\Http\Controllers\PayController::class,'index'])->name('pay');
 Route::get('/dichvu/',[App\Http\Controllers\DichvuController::class,'index'])->name('dichvu');
 
-Route::get('/donhang/',[App\Http\Controllers\DonhangController::class,'index'])->name('donhang');
+Route::get('/donhang/',[App\Http\Controllers\DonhangController::class,'index'])
+    ->middleware('auth')
+    ->name('donhang');
+
 Route::get('/khachhang/',[App\Http\Controllers\KhachhangController::class,'index'])->name('khachhang');
 
 
@@ -86,6 +89,7 @@ Route::post('/cod_payment', [PayController::class, 'cod_payment'])->name('cod_pa
 
 // Route::resource('giohang', GiohangController::class);
 Route::post('/save-cart', [GiohangController::class, 'saveCart'])->name('save.cart'); 
+Route::post('/remove-cart', [GiohangController::class, 'remove'])->name('cart.remove');
 
 
 Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');

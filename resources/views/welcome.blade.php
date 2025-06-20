@@ -11,9 +11,13 @@
   <header>
     <div class="logo"><span>KChip</span>Shop</div>
     <nav id="main-nav">
-        <a href="{{ route('index') }}">Trang Chủ</a>
+        <a href="{{ route('welcome') }}">Trang Chủ</a>
         <a href="{{ route('full',['tat-ca-san']) }}">Sản Phẩm</a>
         <a href="{{ route('dichvu') }}">Dịch Vụ</a>
+        <a href="#" onclick="checkLogin(event)">Đơn hàng</a>
+
+
+
 
     </nav>
     <div class="menu-toggle" id="menu-toggle">
@@ -53,7 +57,7 @@
         <div class="slide-content">
           <h2>Bàn Phím Điện Tử EASYPLAY1s</h2>
           <p>được thiết kế dựa trên các phím đàn trong Sky</p>
-          <a href="#" class="btn">Mua Ngay</a>
+          <a href="https://www.kickstarter.com/projects/summertones/easyplay-1s-pocket-sized-passion-easy-play-inspiration" class="btn">Mua Ngay</a>
         </div>
       </div>
     </div>
@@ -234,5 +238,33 @@
   <script src="{{ asset('frontend/js/index.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function checkLogin(event) {
+        event.preventDefault();
+        @auth
+            // Nếu đã đăng nhập thì chuyển trang
+            window.location.href = "{{ route('donhang') }}";
+        @else
+            // Nếu chưa đăng nhập thì hiện toast và chuyển sau 2s
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn cần đăng nhập để xem đơn hàng!',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true,
+                position: 'top-end',
+                timerProgressBar: true,
+                didClose: () => {
+                    window.location.href = "{{ route('login') }}";
+                }
+            });
+        @endauth
+    }
+</script>
+
 </body>
 </html>
