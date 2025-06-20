@@ -149,8 +149,8 @@ public function vnpayReturn(Request $request)
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $request->input('price');
         $orderId = time()."";
-        $redirectUrl = "https://xxxx.ngrok-free.app/momo_callback";  // sửa ngrok nếu cần
-        $ipnUrl = "https://xxxx.ngrok-free.app/momo_callback";
+        $redirectUrl = "https://9281-118-70-209-177.ngrok-free.app/momo_callback";  // sửa ngrok nếu cần
+        $ipnUrl = "https://9281-118-70-209-177.ngrok-free.app/momo_callback";
 
         $extraData = base64_encode(json_encode([
             'name' => $request->input('name'),

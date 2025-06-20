@@ -386,7 +386,7 @@ body {
                             <label class="method-option"><input type="radio" name="paymentMethod" value="momo" checked> <img src="frontend/images/momo.png"><span>Momo</span></label>
                                                        <label class="method-option"><input type="radio" name="paymentMethod" value="vnpay"> <img src="frontend/images/vnpay.png"><span>VNPAY</span></label>
                             {{-- <label class="method-option"><input type="radio" name="paymentMethod" value="bank"> <img src="frontend/images/bank.png"><span>Chuyển khoản</span></label> --}}
-                            <label class="method-option"><input type="radio" name="paymentMethod" value="cod"> <img src="frontend/images/cod.png"><span>COD</span></label>
+                            <label class="method-option"><input type="radio" name="paymentMethod" value="cod"> <img src="frontend/images/cod.jpg"><span>COD</span></label>
 
                         </div>
                         <div id="paymentDetails" class="payment-details"></div>

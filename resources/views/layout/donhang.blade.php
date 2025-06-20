@@ -136,21 +136,31 @@
           <div class="sheet-intro">
             <p><strong>👤 Họ tên:</strong> {{ $item->name }}</p>
             <p><strong>📧 Email:</strong> {{ $item->email }}</p>
+            <p><strong>📦 Sản phẩm:</strong> {{ $item->title}}</p>
             @if($item->fb)
               <p><strong>🔗 Facebook:</strong> <a href="{{ $item->fb }}" target="_blank">{{ $item->fb }}</a></p>
-            @endif
+             @endif
             @if($item->note)
               <p><strong>📝 Ghi chú:</strong> {{ $item->note }}</p>
             @endif
-            <p><strong>📦 Trạng thái:</strong> <span style="color: blue;">{{ $item->trangthai ?? 'Chưa xử lý' }}</span></p>
+            <p><strong>✅ Phương thức thanh toán:</strong> <span style="color: blue;">{{ $item->trangthai ?? 'Chưa xử lý' }}</span></p>
 
             @if($item->trangthai == 'đã xác nhận')
               <div class="alert alert-success">✅ Đơn hàng đã được xác nhận, khách yêu chờ nhé!</div>
             @elseif($item->trangthai == 'đã gửi hàng')
               <div class="alert alert-warning">🚚 Đơn hàng đã đến tay, check mail thui nào!</div>
             @else
-              <div class="alert alert-info">ℹ️ Trạng thái đơn hàng: {{ $item->trangthai ?? 'Chưa xử lý' }}</div>
+              <div class="alert alert-info">ℹ️ Trạng thái đơn hàng: 
+                
+                @if($item->trangthai=='thucod') 
+                  chờ xác nhận 
+                @else 
+                đã xác nhận
+                @endif
+              
+              </div>
             @endif
+           
           </div>
         @endforeach
       @else
